@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 
 const Hero: React.FC = () => {
+  const [isWinking, setIsWinking] = useState(false);
+
   const handleScrollToNext = () => {
     // Use browser's native smooth scrolling
     const nextSection = document.querySelector('#categories');
     if (nextSection) {
       nextSection.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const handleTurtleHover = () => {
+    setIsWinking(true);
+  };
+
+  const handleTurtleLeave = () => {
+    setIsWinking(false);
   };
 
   return (
@@ -36,6 +46,21 @@ const Hero: React.FC = () => {
           <p className="text-xl sm:text-2xl md:text-3xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed font-normal">
             You already know... but ask anyway.
           </p>
+          
+          {/* Winking Turtle Mascot */}
+          <div className="mb-8">
+            <img
+              src={isWinking ? "/st-wink.png" : "/st-open.png"}
+              alt="SoulTurtle Mascot"
+              className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 mx-auto animate-float-gentle cursor-pointer transition-all duration-300 hover:scale-105"
+              onMouseEnter={handleTurtleHover}
+              onMouseLeave={handleTurtleLeave}
+              style={{ 
+                filter: 'drop-shadow(0 10px 25px rgba(0, 0, 0, 0.1))',
+                animationDelay: '0.5s'
+              }}
+            />
+          </div>
           
           <button className="group px-12 py-6 bg-white/80 text-gray-800 font-semibold rounded-full text-xl shadow-md hover:shadow-lg transition-all duration-300 ease-in-out hover:scale-[1.02] relative overflow-hidden border border-white/70">
             <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[#EAE6FB] to-[#FAD6CF] opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md"></span>
