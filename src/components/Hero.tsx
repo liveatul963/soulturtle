@@ -60,14 +60,19 @@ const Hero: React.FC = () => {
             <span className="text-purple-500">Wink</span>
           </h1>
           
-          {/* Levitating Turtle Mascot with Dynamic Shadow */}
+          {/* Levitating Turtle Mascot - Clean without shadows */}
           <div className="mb-8">
             <img
-              src={shouldShowWink ? "/st-wink-eyes.png" : "/st-open-eyes.png"}
+              src={shouldShowWink ? "/st-winkeyes.png" : "/st-openeyes.png"}
               alt="SoulTurtle Mascot"
               className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 mx-auto animate-levitate cursor-pointer transition-all duration-300 hover:scale-105"
               onMouseEnter={handleTurtleHover}
               onMouseLeave={handleTurtleLeave}
+              onError={(e) => {
+                // Fallback to ensure mascot never breaks
+                console.warn('Mascot image failed to load, using fallback');
+                e.currentTarget.src = shouldShowWink ? "/st-winkeyes.png" : "/st-openeyes.png";
+              }}
             />
           </div>
 
