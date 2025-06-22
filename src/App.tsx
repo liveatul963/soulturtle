@@ -27,20 +27,20 @@ function App() {
 
       {/* Main content with relative positioning */}
       <div className="relative z-10">
-        <section id="hero">
+        <section id="hero" className="scroll-mt-16">
           <Hero />
         </section>
         <ParallaxVisual />
-        <section id="categories">
+        <section id="categories" className="scroll-mt-16">
           <CategoryExplorer />
         </section>
-        <section id="guides">
+        <section id="guides" className="scroll-mt-16">
           <GuideShowcase />
         </section>
-        <section id="testimonials">
+        <section id="testimonials" className="scroll-mt-16">
           <Testimonials />
         </section>
-        <section id="process">
+        <section id="process" className="scroll-mt-16">
           <ProcessTimeline />
         </section>
         <MantraMoment />
