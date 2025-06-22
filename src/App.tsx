@@ -9,6 +9,7 @@ import ProcessTimeline from './components/ProcessTimeline';
 import MantraMoment from './components/MantraMoment';
 import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
+import BoltBadge from './components/BoltBadge';
 
 function App() {
   return (
@@ -46,6 +47,9 @@ function App() {
         <FinalCTA />
         <Footer />
       </div>
+
+      {/* Bolt Badge - Fixed positioning for visibility during scroll */}
+      <BoltBadge />
     </div>
   );
 }
