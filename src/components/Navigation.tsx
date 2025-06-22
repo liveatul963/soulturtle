@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ChevronUp, Home, Grid3X3, Users, HelpCircle, MessageSquare } from 'lucide-react';
+import { Menu, X, ChevronUp, Home, Grid3X3, Users, MessageSquare, HelpCircle } from 'lucide-react';
 
 const Navigation: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,8 +21,8 @@ const Navigation: React.FC = () => {
     { label: 'Home', href: '#hero', icon: Home },
     { label: 'Categories', href: '#categories', icon: Grid3X3 },
     { label: 'Guides', href: '#guides', icon: Users },
-    { label: 'How It Works', href: '#process', icon: HelpCircle },
-    { label: 'Stories', href: '#testimonials', icon: MessageSquare }
+    { label: 'Stories', href: '#testimonials', icon: MessageSquare },
+    { label: 'How It Works', href: '#process', icon: HelpCircle }
   ];
 
   const handleNavClick = (href: string) => {
