@@ -40,7 +40,7 @@ const Hero: React.FC = () => {
   const shouldShowWink = isWinking || isIdleWinking;
 
   return (
-    <section className="hero-section relative min-h-screen bg-gradient-to-br from-[#FAFAF8] via-[#EAE6FB] to-[#DDEDE3] overflow-hidden">
+    <section className="hero-section relative min-h-screen bg-gradient-to-br from-[#F3E8FF] to-[#E0F7FA] overflow-hidden">
       {/* Optimized floating elements */}
       <div className="absolute inset-0 opacity-15 pointer-events-none">
         <div className="absolute top-20 left-10 text-3xl animate-float-gentle">🐢</div>
@@ -54,12 +54,10 @@ const Hero: React.FC = () => {
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 text-center">
         <div className="max-w-5xl mx-auto">
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold mb-12 leading-tight">
-            <span className="bg-gradient-to-r from-[#4A5568] to-[#2D3748] bg-clip-text text-transparent">
-              Real Guides. With a Wink
-            </span>{' '}
-            <span className="inline-block text-4xl sm:text-5xl md:text-6xl lg:text-7xl animate-float-gentle" style={{ color: '#4A5568', animationDelay: '1s' }}>
-              😉
-            </span>
+            <span className="text-gray-800">Real Guides.</span>
+            <br />
+            <span className="text-gray-800">With a </span>
+            <span className="text-purple-500">Wink</span>
           </h1>
           
           {/* Levitating Turtle Mascot with Dynamic Shadow */}
@@ -78,7 +76,7 @@ const Hero: React.FC = () => {
             You already know… but ask anyway.
           </p>
           
-          <button className="group px-12 py-6 bg-white/80 text-gray-800 font-semibold rounded-full text-xl shadow-md hover:shadow-lg transition-all duration-300 ease-in-out hover:scale-[1.02] relative overflow-hidden border border-white/70">
+          <button className="group px-12 py-6 bg-white/90 text-gray-800 font-semibold rounded-full text-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:scale-[1.02] relative overflow-hidden border border-white/70">
             <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[#EAE6FB] to-[#FAD6CF] opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md"></span>
             <span className="relative z-10 font-semibold text-gray-800">Reveal My Guide</span>
           </button>
