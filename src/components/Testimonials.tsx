@@ -25,7 +25,7 @@ const Testimonials: React.FC = () => {
   ];
 
   return (
-    <section className="relative py-12 px-6 bg-gradient-to-b from-[#EAE6FB] via-[#DDEDE3] to-[#FAD6CF] overflow-hidden">
+    <section className="relative py-20 px-6 bg-gradient-to-b from-[#EAE6FB] via-[#DDEDE3] to-[#FAD6CF] overflow-hidden">
       {/* Simple floating elements */}
       <div className="absolute inset-0 pointer-events-none opacity-10">
         <div className="absolute top-20 left-10 text-4xl">💬</div>

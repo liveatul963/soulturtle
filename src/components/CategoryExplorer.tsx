@@ -110,7 +110,7 @@ const CategoryExplorer: React.FC = () => {
 
   if (loading) {
     return (
-      <section className="relative py-12 px-6 bg-gradient-to-b from-[#FAFAF8] via-[#EAE6FB] to-[#DDEDE3] overflow-hidden">
+      <section className="relative py-20 px-6 bg-gradient-to-b from-[#FAFAF8] via-[#EAE6FB] to-[#DDEDE3] overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-semibold mb-4 text-gray-800">
@@ -134,7 +134,7 @@ const CategoryExplorer: React.FC = () => {
 
   if (error) {
     return (
-      <section className="relative py-12 px-6 bg-gradient-to-b from-[#FAFAF8] via-[#EAE6FB] to-[#DDEDE3] overflow-hidden">
+      <section className="relative py-20 px-6 bg-gradient-to-b from-[#FAFAF8] via-[#EAE6FB] to-[#DDEDE3] overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-semibold mb-4 text-gray-800">
@@ -164,7 +164,7 @@ const CategoryExplorer: React.FC = () => {
   }
 
   return (
-    <section className="relative py-12 px-6 bg-gradient-to-b from-[#FAFAF8] via-[#EAE6FB] to-[#DDEDE3] overflow-hidden">
+    <section className="relative py-20 px-6 bg-gradient-to-b from-[#FAFAF8] via-[#EAE6FB] to-[#DDEDE3] overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-semibold mb-4 text-gray-800">

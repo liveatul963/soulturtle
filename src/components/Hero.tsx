@@ -51,7 +51,7 @@ const Hero: React.FC = () => {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 text-center pt-16">
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 text-center">
         <div className="max-w-5xl mx-auto">
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold mb-6 leading-tight">
             <span className="bg-gradient-to-r from-[#4A5568] to-[#2D3748] bg-clip-text text-transparent">
