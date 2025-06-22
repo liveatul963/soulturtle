@@ -47,12 +47,12 @@ const Hero: React.FC = () => {
             You already know... but ask anyway.
           </p>
           
-          {/* Winking Turtle Mascot */}
+          {/* Winking Turtle Mascot - Increased Size */}
           <div className="mb-8">
             <img
               src={isWinking ? "/st-wink-eyes.png" : "/st-open-eyes.png"}
               alt="SoulTurtle Mascot"
-              className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 mx-auto animate-float-gentle cursor-pointer transition-all duration-300 hover:scale-105"
+              className="w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 mx-auto animate-float-gentle cursor-pointer transition-all duration-300 hover:scale-105"
               onMouseEnter={handleTurtleHover}
               onMouseLeave={handleTurtleLeave}
               style={{ 
