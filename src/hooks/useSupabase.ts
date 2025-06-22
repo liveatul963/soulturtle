@@ -42,25 +42,3 @@ export function useSupabaseQuery<T>(
 
   return { data, loading, error, refetch: () => fetchData() };
 }
-
-export function useSupabaseConnection() {
-  const [isConnected, setIsConnected] = useState(false);
-  const [isChecking, setIsChecking] = useState(true);
-
-  useEffect(() => {
-    const checkConnection = async () => {
-      try {
-        const { data, error } = await supabase.from('guides').select('count').limit(1);
-        setIsConnected(!error);
-      } catch (err) {
-        setIsConnected(false);
-      } finally {
-        setIsChecking(false);
-      }
-    };
-
-    checkConnection();
-  }, []);
-
-  return { isConnected, isChecking };
-}
