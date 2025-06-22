@@ -4,7 +4,7 @@ import TiltCard from './TiltCard';
 
 const FinalCTA: React.FC = () => {
   return (
-    <section className="relative py-16 px-6 bg-gradient-to-b from-[#FAFAF8] via-[#EAE6FB] to-[#2D3748] overflow-hidden">
+    <section className="relative py-16 px-6 bg-gradient-to-b from-[#FAFAF8] via-[#EAE6FB] to-indigo-950 overflow-hidden">
       {/* Simple background elements */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-10 left-10 text-4xl">🐢</div>
