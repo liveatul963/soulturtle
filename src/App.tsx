@@ -5,6 +5,7 @@ import VoiceInputSection from './components/VoiceInputSection';
 import ParallaxVisual from './components/ParallaxVisual';
 import CategoryExplorer from './components/CategoryExplorer';
 import GuideShowcase from './components/GuideShowcase';
+import SessionOptions from './components/SessionOptions';
 import BecomeAGuideCTA from './components/BecomeAGuideCTA';
 import Testimonials from './components/Testimonials';
 import ProcessTimeline from './components/ProcessTimeline';
@@ -39,6 +40,9 @@ function App() {
         </section>
         <section id="guides">
           <GuideShowcase />
+        </section>
+        <section id="sessions">
+          <SessionOptions />
         </section>
         <section id="become-a-guide">
           <BecomeAGuideCTA />
