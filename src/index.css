@@ -5,7 +5,6 @@
 /* Optimized CSS for maximum performance */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 4rem;
 }
 
 body {

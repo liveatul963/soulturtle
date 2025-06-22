@@ -28,7 +28,15 @@ const Navigation: React.FC = () => {
   const handleNavClick = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      // Calculate the exact position accounting for the fixed header
+      const headerHeight = 64; // h-16 = 64px
+      const elementPosition = element.offsetTop;
+      const offsetPosition = elementPosition - headerHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
     setIsMenuOpen(false);
   };
@@ -70,7 +78,7 @@ const Navigation: React.FC = () => {
               ))}
               
               <button className="px-6 py-2 bg-gradient-to-r from-[#EAE6FB] to-[#FAD6CF] text-gray-800 font-medium rounded-full hover:shadow-lg transition-all duration-300 ease-in-out hover:scale-[1.02]">
-                Start Journey
+                Login/Signup
               </button>
             </div>
 
@@ -102,7 +110,7 @@ const Navigation: React.FC = () => {
                 </button>
               ))}
               <button className="w-full mt-4 px-6 py-3 bg-gradient-to-r from-[#EAE6FB] to-[#FAD6CF] text-gray-800 font-medium rounded-full hover:shadow-lg transition-all duration-300 ease-in-out hover:scale-[1.02]">
-                Start Journey
+                Login/Signup
               </button>
             </div>
           </div>

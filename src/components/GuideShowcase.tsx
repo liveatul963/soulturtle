@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Star, MessageCircle, Calendar, Loader2 } from 'lucide-react';
+import { Star, MessageCircle, Calendar, Loader2, DollarSign } from 'lucide-react';
 import { supabase, type Guide } from '../lib/supabase';
 import TiltCard from './TiltCard';
 
@@ -169,9 +169,9 @@ const GuideShowcase: React.FC = () => {
                   </p>
                 </div>
 
-                {/* CTA */}
+                {/* CTA with Pricing Badge */}
                 <button 
-                  className={`w-full py-3 rounded-2xl font-medium transition-all duration-300 ease-in-out text-sm ${
+                  className={`w-full py-3 rounded-2xl font-medium transition-all duration-300 ease-in-out text-sm relative ${
                     guide.is_available
                       ? 'bg-gradient-to-r from-[#EAE6FB] to-[#FAD6CF] text-gray-800 hover:shadow-lg hover:scale-[1.02]'
                       : 'bg-gray-100 text-gray-400 cursor-not-allowed'
@@ -181,7 +181,11 @@ const GuideShowcase: React.FC = () => {
                   {guide.is_available ? (
                     <span className="flex items-center justify-center">
                       <Calendar className="w-4 h-4 mr-2" />
-                      Connect with {guide.name}
+                      Book Now
+                      <span className="ml-2 px-2 py-1 bg-white/70 text-xs rounded-full flex items-center">
+                        <DollarSign className="w-3 h-3 mr-1" />
+                        49/session
+                      </span>
                     </span>
                   ) : (
                     'Currently Unavailable'

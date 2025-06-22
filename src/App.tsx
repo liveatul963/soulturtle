@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import ParallaxVisual from './components/ParallaxVisual';
 import CategoryExplorer from './components/CategoryExplorer';
 import GuideShowcase from './components/GuideShowcase';
+import BecomeAGuideCTA from './components/BecomeAGuideCTA';
 import Testimonials from './components/Testimonials';
 import ProcessTimeline from './components/ProcessTimeline';
 import MantraMoment from './components/MantraMoment';
@@ -27,20 +28,23 @@ function App() {
 
       {/* Main content with relative positioning */}
       <div className="relative z-10">
-        <section id="hero" className="scroll-mt-16">
+        <section id="hero">
           <Hero />
         </section>
         <ParallaxVisual />
-        <section id="categories" className="scroll-mt-16">
+        <section id="categories">
           <CategoryExplorer />
         </section>
-        <section id="guides" className="scroll-mt-16">
+        <section id="guides">
           <GuideShowcase />
         </section>
-        <section id="testimonials" className="scroll-mt-16">
+        <section id="become-a-guide">
+          <BecomeAGuideCTA />
+        </section>
+        <section id="testimonials">
           <Testimonials />
         </section>
-        <section id="process" className="scroll-mt-16">
+        <section id="process">
           <ProcessTimeline />
         </section>
         <MantraMoment />
