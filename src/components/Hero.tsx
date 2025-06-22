@@ -50,7 +50,7 @@ const Hero: React.FC = () => {
           {/* Winking Turtle Mascot */}
           <div className="mb-8">
             <img
-              src={isWinking ? "/st-wink.png" : "/st-open.png"}
+              src={isWinking ? "/st-wink-eyes.png" : "/st-open-eyes.png"}
               alt="SoulTurtle Mascot"
               className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 mx-auto animate-float-gentle cursor-pointer transition-all duration-300 hover:scale-105"
               onMouseEnter={handleTurtleHover}
