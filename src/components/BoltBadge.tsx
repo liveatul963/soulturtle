@@ -8,15 +8,11 @@ const BoltBadge: React.FC = () => {
       rel="noopener noreferrer"
       className="fixed bottom-4 right-4 z-50 group transition-transform duration-300 hover:scale-110"
     >
-      {/* Badge Image - Responsive sizing without drop-shadow */}
+      {/* Badge Image - Responsive sizing without any shadow */}
       <img
         src="/black_circle_360x360.png"
         alt="Powered by Bolt"
         className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16"
-        style={{
-          filter: 'none',
-          boxShadow: '0 10px 25px rgba(0, 0, 0, 0.15), 0 4px 10px rgba(0, 0, 0, 0.1)'
-        }}
       />
       
       {/* Tooltip */}
