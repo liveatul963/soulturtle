@@ -10,10 +10,14 @@ import MantraMoment from './components/MantraMoment';
 import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
 import BoltBadge from './components/BoltBadge';
+import ConnectionStatus from './components/ConnectionStatus';
 
 function App() {
   return (
     <div className="overflow-x-hidden relative">
+      {/* Connection Status Indicator */}
+      <ConnectionStatus />
+
       {/* Navigation */}
       <Navigation />
 

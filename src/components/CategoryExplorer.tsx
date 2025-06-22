@@ -1,90 +1,104 @@
-import React from 'react';
-import { Heart, Brain, Compass, Star, Moon, Sun, Shield, Zap, TreePine } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Heart, Brain, Compass, Star, Moon, Sun, Shield, Zap, TreePine, Loader2 } from 'lucide-react';
+import { supabase, type Category } from '../lib/supabase';
+
+// Icon mapping for dynamic icon rendering
+const iconMap = {
+  Heart,
+  Brain,
+  Compass,
+  Star,
+  Moon,
+  Sun,
+  Shield,
+  Zap,
+  TreePine
+};
 
 const CategoryExplorer: React.FC = () => {
-  const categories = [
-    {
-      title: "Love & Relations",
-      icon: Heart,
-      emoji: "💕",
-      description: "Navigate the beautiful complexity of human connection",
-      bgColor: "bg-gradient-to-br from-rose-100/80 to-pink-100/60",
-      hoverBg: "group-hover:from-rose-200/90 group-hover:to-pink-200/70",
-      accentColor: "text-rose-700"
-    },
-    {
-      title: "Life Purpose",
-      icon: Compass,
-      emoji: "🧭",
-      description: "Discover your unique path",
-      bgColor: "bg-gradient-to-br from-amber-100/80 to-orange-100/60",
-      hoverBg: "group-hover:from-amber-200/90 group-hover:to-orange-200/70",
-      accentColor: "text-amber-700"
-    },
-    {
-      title: "Inner Peace",
-      icon: Moon,
-      emoji: "🕯️",
-      description: "Find calm in the storm",
-      bgColor: "bg-gradient-to-br from-indigo-100/80 to-purple-100/60",
-      hoverBg: "group-hover:from-indigo-200/90 group-hover:to-purple-200/70",
-      accentColor: "text-indigo-700"
-    },
-    {
-      title: "Personal Growth",
-      icon: Star,
-      emoji: "🌱",
-      description: "Evolve into your fullest self",
-      bgColor: "bg-gradient-to-br from-emerald-100/80 to-green-100/60",
-      hoverBg: "group-hover:from-emerald-200/90 group-hover:to-green-200/70",
-      accentColor: "text-emerald-700"
-    },
-    {
-      title: "Career & Creativity",
-      icon: Sun,
-      emoji: "🎨",
-      description: "Align passion with purpose",
-      bgColor: "bg-gradient-to-br from-yellow-100/80 to-amber-100/60",
-      hoverBg: "group-hover:from-yellow-200/90 group-hover:to-amber-200/70",
-      accentColor: "text-yellow-700"
-    },
-    {
-      title: "Spiritual Practice",
-      icon: Brain,
-      emoji: "🧘",
-      description: "Deepen your connection to the sacred",
-      bgColor: "bg-gradient-to-br from-violet-100/80 to-purple-100/60",
-      hoverBg: "group-hover:from-violet-200/90 group-hover:to-purple-200/70",
-      accentColor: "text-violet-700"
-    },
-    {
-      title: "Healing & Wellness",
-      icon: Shield,
-      emoji: "🌿",
-      description: "Restore balance to mind, body, and spirit",
-      bgColor: "bg-gradient-to-br from-teal-100/80 to-cyan-100/60",
-      hoverBg: "group-hover:from-teal-200/90 group-hover:to-cyan-200/70",
-      accentColor: "text-teal-700"
-    },
-    {
-      title: "Energy & Intuition",
-      icon: Zap,
-      emoji: "⚡",
-      description: "Awaken your inner knowing and energetic awareness",
-      bgColor: "bg-gradient-to-br from-fuchsia-100/80 to-pink-100/60",
-      hoverBg: "group-hover:from-fuchsia-200/90 group-hover:to-pink-200/70",
-      accentColor: "text-fuchsia-700"
-    },
-    {
-      title: "Nature Connection",
-      icon: TreePine,
-      emoji: "🌲",
-      description: "Find wisdom in the natural world",
-      bgColor: "bg-gradient-to-br from-lime-100/80 to-green-100/60",
-      hoverBg: "group-hover:from-lime-200/90 group-hover:to-green-200/70",
-      accentColor: "text-lime-700"
-    }
-  ];
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        setLoading(true);
+        const { data, error } = await supabase
+          .from('categories')
+          .select('*')
+          .order('created_at', { ascending: true });
+
+        if (error) {
+          throw error;
+        }
+
+        setCategories(data || []);
+      } catch (err) {
+        console.error('Error fetching categories:', err);
+        setError(err instanceof Error ? err.message : 'Failed to load categories');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+  if (loading) {
+    return (
+      <section className="relative py-12 px-6 bg-gradient-to-b from-[#FAFAF8] via-[#EAE6FB] to-[#DDEDE3] overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800">
+              What's on your heart? 💜
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Choose your path. Each guide specializes in different areas of the human experience.
+            </p>
+          </div>
+          
+          <div className="flex justify-center items-center py-12">
+            <div className="flex items-center space-x-3">
+              <Loader2 className="w-6 h-6 animate-spin text-gray-600" />
+              <span className="text-gray-600">Loading categories...</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="relative py-12 px-6 bg-gradient-to-b from-[#FAFAF8] via-[#EAE6FB] to-[#DDEDE3] overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800">
+              What's on your heart? 💜
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Choose your path. Each guide specializes in different areas of the human experience.
+            </p>
+          </div>
+          
+          <div className="flex justify-center items-center py-12">
+            <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md">
+              <p className="text-red-700 text-center">
+                Unable to load categories: {error}
+              </p>
+              <button 
+                onClick={() => window.location.reload()} 
+                className="mt-4 w-full px-4 py-2 bg-red-100 hover:bg-red-200 text-red-700 rounded-lg transition-colors duration-300"
+              >
+                Try Again
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="relative py-12 px-6 bg-gradient-to-b from-[#FAFAF8] via-[#EAE6FB] to-[#DDEDE3] overflow-hidden">
@@ -100,52 +114,56 @@ const CategoryExplorer: React.FC = () => {
 
         {/* Responsive Grid - Works on all devices */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {categories.map((category, index) => (
-            <div
-              key={index}
-              className={`group relative ${category.bgColor} ${category.hoverBg} backdrop-blur-sm rounded-3xl p-6 cursor-pointer transition-all duration-500 hover:scale-105 hover:shadow-2xl border border-white/50 min-h-[180px] flex flex-col overflow-hidden`}
-              style={{
-                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.08)',
-              }}
-            >
-              {/* Subtle pattern overlay */}
-              <div className="absolute inset-0 opacity-5 pointer-events-none">
-                <div className="absolute top-4 right-4 text-5xl transform rotate-12 opacity-30">{category.emoji}</div>
-                <div className="absolute bottom-4 left-4 text-3xl transform -rotate-12 opacity-20">{category.emoji}</div>
-              </div>
+          {categories.map((category) => {
+            const IconComponent = iconMap[category.icon_name as keyof typeof iconMap];
+            
+            return (
+              <div
+                key={category.id}
+                className={`group relative ${category.bg_color} ${category.hover_bg} backdrop-blur-sm rounded-3xl p-6 cursor-pointer transition-all duration-500 hover:scale-105 hover:shadow-2xl border border-white/50 min-h-[180px] flex flex-col overflow-hidden`}
+                style={{
+                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.08)',
+                }}
+              >
+                {/* Subtle pattern overlay */}
+                <div className="absolute inset-0 opacity-5 pointer-events-none">
+                  <div className="absolute top-4 right-4 text-5xl transform rotate-12 opacity-30">{category.emoji}</div>
+                  <div className="absolute bottom-4 left-4 text-3xl transform -rotate-12 opacity-20">{category.emoji}</div>
+                </div>
 
-              {/* Shimmer effect on hover */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 bg-gradient-to-r from-transparent via-white to-transparent transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
+                {/* Shimmer effect on hover */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 bg-gradient-to-r from-transparent via-white to-transparent transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
 
-              {/* Content Container */}
-              <div className="relative z-10 h-full flex flex-col justify-between">
-                <div className="flex-1">
-                  <div className="flex items-center mb-4">
-                    <div className={`p-2 rounded-full bg-white/40 backdrop-blur-sm mr-3 ${category.accentColor} group-hover:scale-110 transition-transform duration-300`}>
-                      <category.icon className="w-4 h-4" />
+                {/* Content Container */}
+                <div className="relative z-10 h-full flex flex-col justify-between">
+                  <div className="flex-1">
+                    <div className="flex items-center mb-4">
+                      <div className={`p-2 rounded-full bg-white/40 backdrop-blur-sm mr-3 ${category.accent_color} group-hover:scale-110 transition-transform duration-300`}>
+                        {IconComponent && <IconComponent className="w-4 h-4" />}
+                      </div>
+                      <span className="text-2xl group-hover:scale-110 transition-transform duration-300">{category.emoji}</span>
                     </div>
-                    <span className="text-2xl group-hover:scale-110 transition-transform duration-300">{category.emoji}</span>
+                    <h3 className={`text-lg font-bold mb-3 leading-tight ${category.accent_color}`}>
+                      {category.title}
+                    </h3>
+                    <p className="text-gray-700 text-sm leading-relaxed">
+                      {category.description}
+                    </p>
                   </div>
-                  <h3 className={`text-lg font-bold mb-3 leading-tight ${category.accentColor}`}>
-                    {category.title}
-                  </h3>
-                  <p className="text-gray-700 text-sm leading-relaxed">
-                    {category.description}
-                  </p>
+
+                  {/* Enhanced hover effect */}
+                  <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 mt-4">
+                    <div className={`inline-flex items-center font-semibold text-sm bg-white/60 px-4 py-2 rounded-full backdrop-blur-sm border border-white/40 shadow-sm ${category.accent_color}`}>
+                      Explore <span className="ml-2 group-hover:translate-x-1 transition-transform duration-300">→</span>
+                    </div>
+                  </div>
                 </div>
 
-                {/* Enhanced hover effect */}
-                <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 mt-4">
-                  <div className={`inline-flex items-center font-semibold text-sm bg-white/60 px-4 py-2 rounded-full backdrop-blur-sm border border-white/40 shadow-sm ${category.accentColor}`}>
-                    Explore <span className="ml-2 group-hover:translate-x-1 transition-transform duration-300">→</span>
-                  </div>
-                </div>
+                {/* Glow effect on hover */}
+                <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-40 transition-opacity duration-500 bg-gradient-to-br from-white/20 via-transparent to-white/10 pointer-events-none"></div>
               </div>
-
-              {/* Glow effect on hover */}
-              <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-40 transition-opacity duration-500 bg-gradient-to-br from-white/20 via-transparent to-white/10 pointer-events-none"></div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Call to action */}
