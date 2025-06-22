@@ -81,15 +81,17 @@ body::-webkit-scrollbar {
   }
 }
 
-/* Levitating animation for the mascot - subtle meditation float */
+/* Levitating animation for the mascot with dynamic shadow */
 @keyframes levitate {
   0%, 100% { 
     transform: translateY(0px);
     opacity: 0.95;
+    filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.15)) drop-shadow(0 5px 15px rgba(0, 0, 0, 0.1));
   }
   50% { 
-    transform: translateY(-12px);
+    transform: translateY(-16px);
     opacity: 1;
+    filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.08)) drop-shadow(0 10px 25px rgba(0, 0, 0, 0.05));
   }
 }
 
@@ -249,7 +251,7 @@ body::-webkit-scrollbar {
 /* Levitating animation class */
 .animate-levitate {
   animation: levitate 5s ease-in-out infinite;
-  will-change: transform, opacity;
+  will-change: transform, opacity, filter;
 }
 
 /* Performance optimized button */
