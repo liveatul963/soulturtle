@@ -1,8 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const [isWinking, setIsWinking] = useState(false);
+  const [isIdleWinking, setIsIdleWinking] = useState(false);
+
+  useEffect(() => {
+    // Set up periodic idle winking
+    const idleWinkInterval = setInterval(() => {
+      if (!isWinking) { // Only wink if not already winking from hover
+        setIsIdleWinking(true);
+        setTimeout(() => {
+          setIsIdleWinking(false);
+        }, 800); // Wink duration
+      }
+    }, 6000); // Wink every 6 seconds
+
+    return () => clearInterval(idleWinkInterval);
+  }, [isWinking]);
 
   const handleScrollToNext = () => {
     // Use browser's native smooth scrolling
@@ -14,11 +29,15 @@ const Hero: React.FC = () => {
 
   const handleTurtleHover = () => {
     setIsWinking(true);
+    setIsIdleWinking(false); // Stop idle winking when hovering
   };
 
   const handleTurtleLeave = () => {
     setIsWinking(false);
   };
+
+  // Determine which image to show
+  const shouldShowWink = isWinking || isIdleWinking;
 
   return (
     <section className="hero-section relative min-h-screen bg-gradient-to-br from-[#FAFAF8] via-[#EAE6FB] to-[#DDEDE3] overflow-hidden">
@@ -47,10 +66,10 @@ const Hero: React.FC = () => {
             You already know... but ask anyway.
           </p>
           
-          {/* Levitating Turtle Mascot */}
+          {/* Levitating Turtle Mascot with Periodic Winking */}
           <div className="mb-8">
             <img
-              src={isWinking ? "/st-wink-eyes.png" : "/st-open-eyes.png"}
+              src={shouldShowWink ? "/st-wink-eyes.png" : "/st-open-eyes.png"}
               alt="SoulTurtle Mascot"
               className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 mx-auto animate-levitate cursor-pointer transition-all duration-300 hover:scale-105"
               onMouseEnter={handleTurtleHover}
