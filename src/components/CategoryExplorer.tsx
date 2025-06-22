@@ -16,6 +16,64 @@ const iconMap = {
   TreePine
 };
 
+// Unique pastel color schemes for each card
+const pastelColorSchemes = [
+  {
+    bg: 'bg-gradient-to-br from-rose-100/80 to-pink-100/60',
+    hover: 'group-hover:from-rose-200/90 group-hover:to-pink-200/70',
+    accent: 'text-rose-700',
+    iconBg: 'bg-rose-50/70'
+  },
+  {
+    bg: 'bg-gradient-to-br from-blue-100/80 to-cyan-100/60',
+    hover: 'group-hover:from-blue-200/90 group-hover:to-cyan-200/70',
+    accent: 'text-blue-700',
+    iconBg: 'bg-blue-50/70'
+  },
+  {
+    bg: 'bg-gradient-to-br from-purple-100/80 to-lavender-100/60',
+    hover: 'group-hover:from-purple-200/90 group-hover:to-purple-200/70',
+    accent: 'text-purple-700',
+    iconBg: 'bg-purple-50/70'
+  },
+  {
+    bg: 'bg-gradient-to-br from-emerald-100/80 to-teal-100/60',
+    hover: 'group-hover:from-emerald-200/90 group-hover:to-teal-200/70',
+    accent: 'text-emerald-700',
+    iconBg: 'bg-emerald-50/70'
+  },
+  {
+    bg: 'bg-gradient-to-br from-amber-100/80 to-yellow-100/60',
+    hover: 'group-hover:from-amber-200/90 group-hover:to-yellow-200/70',
+    accent: 'text-amber-700',
+    iconBg: 'bg-amber-50/70'
+  },
+  {
+    bg: 'bg-gradient-to-br from-indigo-100/80 to-blue-100/60',
+    hover: 'group-hover:from-indigo-200/90 group-hover:to-blue-200/70',
+    accent: 'text-indigo-700',
+    iconBg: 'bg-indigo-50/70'
+  },
+  {
+    bg: 'bg-gradient-to-br from-lime-100/80 to-green-100/60',
+    hover: 'group-hover:from-lime-200/90 group-hover:to-green-200/70',
+    accent: 'text-lime-700',
+    iconBg: 'bg-lime-50/70'
+  },
+  {
+    bg: 'bg-gradient-to-br from-orange-100/80 to-red-100/60',
+    hover: 'group-hover:from-orange-200/90 group-hover:to-red-200/70',
+    accent: 'text-orange-700',
+    iconBg: 'bg-orange-50/70'
+  },
+  {
+    bg: 'bg-gradient-to-br from-violet-100/80 to-fuchsia-100/60',
+    hover: 'group-hover:from-violet-200/90 group-hover:to-fuchsia-200/70',
+    accent: 'text-violet-700',
+    iconBg: 'bg-violet-50/70'
+  }
+];
+
 const CategoryExplorer: React.FC = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
@@ -121,6 +179,7 @@ const CategoryExplorer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {categories.map((category, index) => {
             const IconComponent = iconMap[category.icon_name as keyof typeof iconMap];
+            const colorScheme = pastelColorSchemes[index % pastelColorSchemes.length];
             
             return (
               <TiltCard
@@ -134,7 +193,7 @@ const CategoryExplorer: React.FC = () => {
                 }}
               >
                 <div
-                  className={`group relative ${category.bg_color} ${category.hover_bg} rounded-3xl p-6 cursor-pointer transition-all duration-500 hover:shadow-2xl border border-white/30 min-h-[180px] flex flex-col overflow-hidden`}
+                  className={`group relative ${colorScheme.bg} ${colorScheme.hover} rounded-3xl p-6 cursor-pointer transition-all duration-500 hover:shadow-2xl border border-white/30 min-h-[180px] flex flex-col overflow-hidden`}
                   style={{
                     boxShadow: '0 8px 32px rgba(0, 0, 0, 0.08)',
                   }}
@@ -152,12 +211,12 @@ const CategoryExplorer: React.FC = () => {
                   <div className="relative z-10 h-full flex flex-col justify-between">
                     <div className="flex-1">
                       <div className="flex items-center mb-4">
-                        <div className={`p-2 rounded-full bg-white/50 mr-3 ${category.accent_color} group-hover:scale-110 transition-transform duration-300`}>
-                          {IconComponent && <IconComponent className="w-4 h-4" />}
+                        <div className={`p-2 rounded-full ${colorScheme.iconBg} mr-3 group-hover:scale-110 transition-transform duration-300`}>
+                          {IconComponent && <IconComponent className={`w-4 h-4 ${colorScheme.accent}`} />}
                         </div>
                         <span className="text-2xl group-hover:scale-110 transition-transform duration-300">{category.emoji}</span>
                       </div>
-                      <h3 className={`text-lg font-semibold mb-3 leading-tight ${category.accent_color}`}>
+                      <h3 className={`text-lg font-semibold mb-3 leading-tight ${colorScheme.accent}`}>
                         {category.title}
                       </h3>
                       <p className="text-gray-700 text-sm leading-relaxed font-normal">
@@ -167,7 +226,7 @@ const CategoryExplorer: React.FC = () => {
 
                     {/* Enhanced hover effect */}
                     <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 mt-4">
-                      <div className={`inline-flex items-center font-medium text-sm bg-white/70 px-4 py-2 rounded-full border border-white/50 shadow-sm ${category.accent_color}`}>
+                      <div className={`inline-flex items-center font-medium text-sm bg-white/70 px-4 py-2 rounded-full border border-white/50 shadow-sm ${colorScheme.accent}`}>
                         Explore <span className="ml-2 group-hover:translate-x-1 transition-transform duration-300">→</span>
                       </div>
                     </div>
