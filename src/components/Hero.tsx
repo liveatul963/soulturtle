@@ -53,7 +53,7 @@ const Hero: React.FC = () => {
       {/* Main Content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 text-center">
         <div className="max-w-5xl mx-auto">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold mb-6 leading-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold mb-12 leading-tight">
             <span className="bg-gradient-to-r from-[#4A5568] to-[#2D3748] bg-clip-text text-transparent">
               Real Guides. With a Wink
             </span>{' '}
@@ -62,11 +62,7 @@ const Hero: React.FC = () => {
             </span>
           </h1>
           
-          <p className="text-xl sm:text-2xl md:text-3xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed font-normal">
-            You already know... but ask anyway.
-          </p>
-          
-          {/* Levitating Turtle Mascot with Periodic Winking */}
+          {/* Levitating Turtle Mascot with Dynamic Shadow */}
           <div className="mb-8">
             <img
               src={shouldShowWink ? "/st-wink-eyes.png" : "/st-open-eyes.png"}
@@ -74,16 +70,17 @@ const Hero: React.FC = () => {
               className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 mx-auto animate-levitate cursor-pointer transition-all duration-300 hover:scale-105"
               onMouseEnter={handleTurtleHover}
               onMouseLeave={handleTurtleLeave}
-              style={{ 
-                filter: 'drop-shadow(0 10px 25px rgba(0, 0, 0, 0.1))',
-                animationDelay: '0.5s'
-              }}
             />
           </div>
+
+          {/* Subheadline - positioned after mascot */}
+          <p className="text-xl sm:text-2xl md:text-3xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed font-normal">
+            You already know… but ask anyway.
+          </p>
           
           <button className="group px-12 py-6 bg-white/80 text-gray-800 font-semibold rounded-full text-xl shadow-md hover:shadow-lg transition-all duration-300 ease-in-out hover:scale-[1.02] relative overflow-hidden border border-white/70">
             <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[#EAE6FB] to-[#FAD6CF] opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md"></span>
-            <span className="relative z-10 font-semibold text-gray-800">Ask Your Turtle</span>
+            <span className="relative z-10 font-semibold text-gray-800">Reveal My Guide</span>
           </button>
         </div>
       </div>
