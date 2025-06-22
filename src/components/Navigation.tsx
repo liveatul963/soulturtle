@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ChevronUp } from 'lucide-react';
+import { Menu, X, ChevronUp, Home, Grid3X3, Users, HelpCircle, MessageSquare } from 'lucide-react';
 
 const Navigation: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,11 +18,11 @@ const Navigation: React.FC = () => {
   }, []);
 
   const navItems = [
-    { label: 'Home', href: '#hero' },
-    { label: 'Categories', href: '#categories' },
-    { label: 'Guides', href: '#guides' },
-    { label: 'How It Works', href: '#process' },
-    { label: 'Stories', href: '#testimonials' }
+    { label: 'Home', href: '#hero', icon: Home },
+    { label: 'Categories', href: '#categories', icon: Grid3X3 },
+    { label: 'Guides', href: '#guides', icon: Users },
+    { label: 'How It Works', href: '#process', icon: HelpCircle },
+    { label: 'Stories', href: '#testimonials', icon: MessageSquare }
   ];
 
   const handleNavClick = (href: string) => {
@@ -39,10 +39,10 @@ const Navigation: React.FC = () => {
 
   return (
     <>
-      {/* Main Navigation */}
+      {/* Main Navigation with Subtle Glass Effect */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled 
-          ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-white/20' 
+          ? 'bg-white/70 backdrop-blur-sm shadow-lg border-b border-white/20' 
           : 'bg-transparent'
       }`}>
         <div className="max-w-7xl mx-auto px-6">
@@ -90,7 +90,7 @@ const Navigation: React.FC = () => {
             ? 'max-h-96 opacity-100' 
             : 'max-h-0 opacity-0 overflow-hidden'
         }`}>
-          <div className="bg-white/95 backdrop-blur-md border-t border-gray-200/50">
+          <div className="bg-white/80 backdrop-blur-sm border-t border-gray-200/50">
             <div className="px-6 py-4 space-y-3">
               {navItems.map((item) => (
                 <button
@@ -109,12 +109,31 @@ const Navigation: React.FC = () => {
         </div>
       </nav>
 
+      {/* Mobile Bottom Navigation */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-t border-gray-200/50 shadow-lg">
+        <div className="flex justify-around items-center py-2">
+          {navItems.map((item) => {
+            const IconComponent = item.icon;
+            return (
+              <button
+                key={item.label}
+                onClick={() => handleNavClick(item.href)}
+                className="flex flex-col items-center justify-center p-2 text-gray-600 hover:text-gray-900 transition-colors duration-300 min-w-0 flex-1"
+              >
+                <IconComponent className="w-5 h-5 mb-1" />
+                <span className="text-xs font-medium truncate">{item.label}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
       {/* Scroll to Top Button */}
       <button
         onClick={handleScrollToTop}
-        className={`fixed bottom-8 right-8 z-50 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg border border-white/50 flex items-center justify-center transition-all duration-300 ease-in-out ${
+        className={`fixed bottom-20 right-8 md:bottom-8 z-50 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg border border-white/50 flex items-center justify-center transition-all duration-300 ease-in-out ${
           showScrollTop 
-            ? 'opacity-100 translate-y-0 hover:scale-[1.02] hover:shadow-xl' 
+            ? 'opacity-100 translate-y-0 hover:shadow-xl' 
             : 'opacity-0 translate-y-4 pointer-events-none'
         }`}
       >
