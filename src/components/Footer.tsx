@@ -78,7 +78,7 @@ const Footer: React.FC = () => {
         <div className="border-t border-indigo-800 pt-6 mb-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-indigo-300 mb-4 md:mb-0 font-normal">
-              © 2025 SoulTurtle. Made with love for seekers everywhere.
+              Built with ❤️ and ⚡ by <a href="https://bolt.new" target="_blank" rel="noopener noreferrer" className="text-white hover:text-indigo-200 transition-colors duration-300 underline">Bolt.new</a> for seekers everywhere.
             </p>
             
             <div className="flex items-center space-x-6 text-indigo-300 text-sm">
