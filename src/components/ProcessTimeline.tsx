@@ -37,10 +37,10 @@ const ProcessTimeline: React.FC = () => {
     <section className="relative py-12 px-6 bg-gradient-to-b from-[#DDEDE3] via-[#FAFAF8] to-[#EAE6FB] overflow-hidden">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800">
+          <h2 className="text-4xl md:text-5xl font-semibold mb-4 text-gray-800">
             How It Works 🐢
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto font-normal">
             Simple, gentle, profound. Your journey unfolds naturally.
           </p>
         </div>
@@ -67,15 +67,15 @@ const ProcessTimeline: React.FC = () => {
             >
               {/* Content */}
               <div className={`flex-1 ${index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'} ml-16 md:ml-0`}>
-                <div className={`bg-gradient-to-br ${step.color} rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105`}>
+                <div className={`bg-gradient-to-br ${step.color} rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]`}>
                   <div className="flex items-center mb-3">
                     <step.icon className="w-5 h-5 mr-3 text-gray-700" />
                     <span className="text-2xl mr-3">{step.emoji}</span>
-                    <h3 className="text-xl font-bold text-gray-800">
+                    <h3 className="text-xl font-semibold text-gray-800">
                       {step.title}
                     </h3>
                   </div>
-                  <p className="text-gray-700 leading-relaxed text-sm">
+                  <p className="text-gray-700 leading-relaxed text-sm font-normal">
                     {step.description}
                   </p>
                 </div>

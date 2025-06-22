@@ -53,7 +53,7 @@ const Navigation: React.FC = () => {
               onClick={() => handleNavClick('#hero')}
             >
               <span className="text-2xl mr-2 group-hover:scale-110 transition-transform duration-300">🐢</span>
-              <span className="text-xl font-bold text-gray-800">SoulTurtle</span>
+              <span className="text-xl font-semibold text-gray-800">SoulTurtle</span>
             </div>
 
             {/* Desktop Navigation */}
@@ -69,7 +69,7 @@ const Navigation: React.FC = () => {
                 </button>
               ))}
               
-              <button className="px-6 py-2 bg-gradient-to-r from-[#EAE6FB] to-[#FAD6CF] text-gray-800 font-semibold rounded-full hover:shadow-lg transition-all duration-300 hover:scale-105">
+              <button className="px-6 py-2 bg-gradient-to-r from-[#EAE6FB] to-[#FAD6CF] text-gray-800 font-medium rounded-full hover:shadow-lg transition-all duration-300 ease-in-out hover:scale-[1.02]">
                 Start Journey
               </button>
             </div>
@@ -101,7 +101,7 @@ const Navigation: React.FC = () => {
                   {item.label}
                 </button>
               ))}
-              <button className="w-full mt-4 px-6 py-3 bg-gradient-to-r from-[#EAE6FB] to-[#FAD6CF] text-gray-800 font-semibold rounded-full hover:shadow-lg transition-all duration-300">
+              <button className="w-full mt-4 px-6 py-3 bg-gradient-to-r from-[#EAE6FB] to-[#FAD6CF] text-gray-800 font-medium rounded-full hover:shadow-lg transition-all duration-300 ease-in-out hover:scale-[1.02]">
                 Start Journey
               </button>
             </div>
@@ -112,9 +112,9 @@ const Navigation: React.FC = () => {
       {/* Scroll to Top Button */}
       <button
         onClick={handleScrollToTop}
-        className={`fixed bottom-8 right-8 z-50 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg border border-white/50 flex items-center justify-center transition-all duration-300 ${
+        className={`fixed bottom-8 right-8 z-50 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg border border-white/50 flex items-center justify-center transition-all duration-300 ease-in-out ${
           showScrollTop 
-            ? 'opacity-100 translate-y-0 hover:scale-110 hover:shadow-xl' 
+            ? 'opacity-100 translate-y-0 hover:scale-[1.02] hover:shadow-xl' 
             : 'opacity-0 translate-y-4 pointer-events-none'
         }`}
       >

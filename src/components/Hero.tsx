@@ -24,7 +24,7 @@ const Hero: React.FC = () => {
       {/* Main Content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 text-center">
         <div className="max-w-5xl mx-auto">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold mb-6 leading-tight">
             <span className="bg-gradient-to-r from-[#4A5568] to-[#2D3748] bg-clip-text text-transparent">
               Real Guides. With a Wink
             </span>{' '}
@@ -33,12 +33,12 @@ const Hero: React.FC = () => {
             </span>
           </h1>
           
-          <p className="text-xl sm:text-2xl md:text-3xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl sm:text-2xl md:text-3xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed font-normal">
             You already know... but ask anyway.
           </p>
           
-          <button className="group px-12 py-6 bg-white/25 backdrop-blur-sm border-2 border-white/30 text-gray-800 font-bold rounded-full text-xl shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 hover:bg-white/35">
-            <span className="font-bold text-gray-800">Ask Your Turtle</span>
+          <button className="group px-12 py-6 bg-white/25 backdrop-blur-sm border-2 border-white/30 text-gray-800 font-semibold rounded-full text-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:scale-[1.02] hover:bg-white/35">
+            <span className="font-semibold text-gray-800">Ask Your Turtle</span>
           </button>
         </div>
       </div>
@@ -69,7 +69,7 @@ const Hero: React.FC = () => {
 
           {/* Hover hint text */}
           <div className="absolute top-16 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none">
-            <p className="text-xs text-gray-500 whitespace-nowrap bg-white/90 backdrop-blur-md px-4 py-2 rounded-full border border-white/60 shadow-lg">
+            <p className="text-xs text-gray-500 whitespace-nowrap bg-white/90 backdrop-blur-md px-4 py-2 rounded-full border border-white/60 shadow-lg font-normal">
               Scroll to explore
             </p>
           </div>

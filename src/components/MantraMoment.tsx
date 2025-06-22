@@ -56,7 +56,7 @@ const MantraMoment: React.FC = () => {
           <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-white/50 to-transparent border border-white/30 flex items-center justify-center">
             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#FAFAF8] to-[#EAE6FB]"></div>
           </div>
-          <p className="mt-4 text-gray-600">
+          <p className="mt-4 text-gray-600 font-normal">
             Take a deep breath. You're doing beautifully.
           </p>
         </div>

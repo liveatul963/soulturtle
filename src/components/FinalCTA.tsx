@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight, Sparkles } from 'lucide-react';
+import TiltCard from './TiltCard';
 
 const FinalCTA: React.FC = () => {
   return (
@@ -14,17 +15,17 @@ const FinalCTA: React.FC = () => {
 
       <div className="max-w-4xl mx-auto text-center">
         <div className="mb-10">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800 leading-tight">
+          <h2 className="text-4xl md:text-5xl font-semibold mb-4 text-gray-800 leading-tight">
             Ready to meet your mirror? 🪞
           </h2>
-          <p className="text-xl md:text-2xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl text-gray-600 max-w-2xl mx-auto leading-relaxed font-normal">
             Your guides are waiting. Your wisdom is ready. The conversation that changes everything starts now.
           </p>
         </div>
 
         {/* Main CTA */}
         <div className="mb-10">
-          <button className="group relative px-12 py-6 bg-gradient-to-r from-[#EAE6FB] via-[#DDEDE3] to-[#FAFAF8] text-gray-800 font-bold rounded-full text-xl hover:shadow-xl transition-all duration-300 transform hover:scale-105 overflow-hidden">
+          <button className="group relative px-12 py-6 bg-gradient-to-r from-[#EAE6FB] via-[#DDEDE3] to-[#FAFAF8] text-gray-800 font-semibold rounded-full text-xl hover:shadow-xl transition-all duration-300 ease-in-out hover:scale-[1.02] overflow-hidden">
             <span className="relative z-10 flex items-center justify-center">
               Start Your Journey
               <ArrowRight className="ml-3 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
@@ -38,30 +39,34 @@ const FinalCTA: React.FC = () => {
         </div>
 
         {/* Secondary Actions */}
-        <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-          <button className="group bg-white/60 backdrop-blur-sm rounded-2xl p-6 text-center hover:bg-white/80 transition-all duration-300 hover:scale-105 shadow-lg">
-            <div className="text-2xl mb-3">📱</div>
-            <h3 className="font-semibold text-gray-800 mb-2">Quick Chat</h3>
-            <p className="text-gray-600 text-sm">Start with a 15-minute conversation</p>
-          </button>
+        <div className="grid md:grid-cols-2 gap-4 md:gap-6 max-w-2xl mx-auto">
+          <TiltCard>
+            <button className="group bg-white/60 backdrop-blur-sm rounded-2xl p-6 text-center hover:bg-white/80 transition-all duration-300 ease-in-out hover:scale-[1.02] shadow-lg w-full">
+              <div className="text-2xl mb-3">📱</div>
+              <h3 className="font-medium text-gray-800 mb-2">Quick Chat</h3>
+              <p className="text-gray-600 text-sm font-normal">Start with a 15-minute conversation</p>
+            </button>
+          </TiltCard>
 
-          <button className="group bg-white/60 backdrop-blur-sm rounded-2xl p-6 text-center hover:bg-white/80 transition-all duration-300 hover:scale-105 shadow-lg">
-            <div className="text-2xl mb-3">🌙</div>
-            <h3 className="font-semibold text-gray-800 mb-2">Deep Dive</h3>
-            <p className="text-gray-600 text-sm">Full session for profound exploration</p>
-          </button>
+          <TiltCard>
+            <button className="group bg-white/60 backdrop-blur-sm rounded-2xl p-6 text-center hover:bg-white/80 transition-all duration-300 ease-in-out hover:scale-[1.02] shadow-lg w-full">
+              <div className="text-2xl mb-3">🌙</div>
+              <h3 className="font-medium text-gray-800 mb-2">Deep Dive</h3>
+              <p className="text-gray-600 text-sm font-normal">Full session for profound exploration</p>
+            </button>
+          </TiltCard>
         </div>
 
         {/* Trust Indicators */}
         <div className="mt-12 pt-6 border-t border-gray-200/30">
-          <p className="text-gray-300 mb-3">Trusted by seekers worldwide</p>
+          <p className="text-gray-300 mb-3 font-normal">Trusted by seekers worldwide</p>
           <div className="flex justify-center items-center space-x-8 text-xl opacity-60">
             <span>🌟</span>
-            <span className="text-gray-300 text-sm">Safe Space</span>
+            <span className="text-gray-300 text-sm font-normal">Safe Space</span>
             <span>🔒</span>
-            <span className="text-gray-300 text-sm">Private</span>
+            <span className="text-gray-300 text-sm font-normal">Private</span>
             <span>💚</span>
-            <span className="text-gray-300 text-sm">Non-judgmental</span>
+            <span className="text-gray-300 text-sm font-normal">Non-judgmental</span>
           </div>
         </div>
       </div>

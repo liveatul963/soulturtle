@@ -237,7 +237,7 @@ body::-webkit-scrollbar {
 /* Performance optimized button */
 .btn-primary {
   @apply px-8 py-4 bg-gradient-to-r from-purple-400 to-pink-400 text-white font-semibold rounded-full;
-  @apply hover:from-purple-500 hover:to-pink-500 transform hover:scale-105 transition-all duration-300;
+  @apply hover:from-purple-500 hover:to-pink-500 transform hover:scale-[1.02] transition-all duration-300;
   @apply focus:outline-none focus:ring-4 focus:ring-purple-300;
 }
 
@@ -253,6 +253,13 @@ a:focus-visible,
   outline: 2px solid #EAE6FB;
   outline-offset: 2px;
   box-shadow: 0 0 0 4px rgba(234, 230, 251, 0.3);
+}
+
+/* GPU acceleration for performance */
+.transform-gpu {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
 /* Accessibility - respect user preferences */
@@ -282,6 +289,11 @@ a:focus-visible,
   
   html {
     scroll-behavior: auto;
+  }
+  
+  /* Disable tilt effects for reduced motion */
+  .transform-gpu {
+    transform: none !important;
   }
 }
 
@@ -313,4 +325,25 @@ a:focus-visible,
 .nav-backdrop {
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 768px) {
+  /* Reduce animation complexity on mobile */
+  .animate-float,
+  .animate-float-gentle,
+  .animate-bounce-gentle {
+    animation-duration: 6s;
+  }
+  
+  /* Ensure proper spacing on mobile */
+  .grid {
+    gap: 1rem;
+  }
+  
+  /* Mobile padding adjustments */
+  .px-6 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
