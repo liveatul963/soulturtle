@@ -1,6 +1,7 @@
 import React from 'react';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
+import VoiceInputSection from './components/VoiceInputSection';
 import ParallaxVisual from './components/ParallaxVisual';
 import CategoryExplorer from './components/CategoryExplorer';
 import GuideShowcase from './components/GuideShowcase';
@@ -31,6 +32,7 @@ function App() {
         <section id="hero">
           <Hero />
         </section>
+        <VoiceInputSection />
         <ParallaxVisual />
         <section id="categories">
           <CategoryExplorer />

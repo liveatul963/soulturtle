@@ -87,8 +87,18 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
+        {/* Become a Guide Link */}
+        <div className="text-center pt-4 border-t border-indigo-800">
+          <a 
+            href="#become-a-guide" 
+            className="text-indigo-300 hover:text-white transition-colors duration-300 text-sm font-normal underline decoration-dotted underline-offset-4"
+          >
+            Earn by guiding souls – Become a Guide
+          </a>
+        </div>
+
         {/* Final Message */}
-        <div className="text-center pt-6 border-t border-indigo-800">
+        <div className="text-center pt-6 border-t border-indigo-800 mt-6">
           <p className="text-indigo-300 text-lg italic mb-3 font-light">
             "The turtle teaches us that the journey inward is the longest journey of all."
           </p>
