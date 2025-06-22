@@ -81,6 +81,18 @@ body::-webkit-scrollbar {
   }
 }
 
+/* Levitating animation for the mascot - subtle meditation float */
+@keyframes levitate {
+  0%, 100% { 
+    transform: translateY(0px);
+    opacity: 0.95;
+  }
+  50% { 
+    transform: translateY(-12px);
+    opacity: 1;
+  }
+}
+
 /* Enhanced hover animations - GPU accelerated */
 @keyframes glow-pulse {
   0%, 100% {
@@ -234,6 +246,12 @@ body::-webkit-scrollbar {
   will-change: transform;
 }
 
+/* Levitating animation class */
+.animate-levitate {
+  animation: levitate 5s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
 /* Performance optimized button */
 .btn-primary {
   @apply px-8 py-4 bg-gradient-to-r from-purple-400 to-pink-400 text-white font-semibold rounded-full;
@@ -278,7 +296,8 @@ a:focus-visible,
   .animate-drift,
   .animate-timeline-flow,
   .animate-timeline-shimmer,
-  .animate-spin-slow {
+  .animate-spin-slow,
+  .animate-levitate {
     animation: none;
   }
   
@@ -332,7 +351,8 @@ a:focus-visible,
   /* Reduce animation complexity on mobile */
   .animate-float,
   .animate-float-gentle,
-  .animate-bounce-gentle {
+  .animate-bounce-gentle,
+  .animate-levitate {
     animation-duration: 6s;
   }
   
