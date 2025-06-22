@@ -37,8 +37,9 @@ const Hero: React.FC = () => {
             You already know... but ask anyway.
           </p>
           
-          <button className="group px-12 py-6 bg-white/25 backdrop-blur-sm border-2 border-white/30 text-gray-800 font-semibold rounded-full text-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:scale-[1.02] hover:bg-white/35">
-            <span className="font-semibold text-gray-800">Ask Your Turtle</span>
+          <button className="group px-12 py-6 bg-white/80 text-gray-800 font-semibold rounded-full text-xl shadow-md hover:shadow-lg transition-all duration-300 ease-in-out hover:scale-[1.02] relative overflow-hidden border border-white/70">
+            <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[#EAE6FB] to-[#FAD6CF] opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md"></span>
+            <span className="relative z-10 font-semibold text-gray-800">Ask Your Turtle</span>
           </button>
         </div>
       </div>
