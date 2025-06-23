@@ -6,7 +6,14 @@ const Hero: React.FC = () => {
   const [isIdleWinking, setIsIdleWinking] = useState(false);
 
   useEffect(() => {
-    // Set up periodic idle winking
+    // 1. Pre-load both mascot images to prevent 404 race conditions
+    const preloadImages = ["/st-openeyes.png", "/st-winkeyes.png"];
+    preloadImages.forEach(src => {
+      const img = new Image();
+      img.src = src;
+    });
+
+    // 2. Set up periodic idle winking
     const idleWinkInterval = setInterval(() => {
       if (!isWinking) { // Only wink if not already winking from hover
         setIsIdleWinking(true);
@@ -17,7 +24,7 @@ const Hero: React.FC = () => {
     }, 6000); // Wink every 6 seconds
 
     return () => clearInterval(idleWinkInterval);
-  }, [isWinking]);
+  }, []); // Empty dependency array - set up once on mount
 
   const handleScrollToNext = () => {
     // Use browser's native smooth scrolling
@@ -69,10 +76,10 @@ const Hero: React.FC = () => {
               onMouseEnter={handleTurtleHover}
               onMouseLeave={handleTurtleLeave}
               onError={(e) => {
-                // Fallback to ensure mascot never breaks
-                console.warn('Mascot image failed to load, using fallback');
-                e.currentTarget.src = shouldShowWink ? "/st-winkeyes.png" : "/st-openeyes.png";
+                // Fallback to open eyes image to prevent infinite error loops
+                e.currentTarget.src = "/st-openeyes.png";
               }}
+              aria-hidden="true"
             />
           </div>
 
