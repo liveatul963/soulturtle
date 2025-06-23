@@ -20,16 +20,6 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-/* Bulletproof CSS for Blinking - eliminates flicker */
-@keyframes blink {
-  0%, 96%, 100% { opacity: 1; }
-  97%, 99%     { opacity: 0; }
-}
-
-.animate-blink-slow {
-  animation: blink 4.2s infinite;
-}
-
 /* vertical float only – no opacity */
 @keyframes levitate {
   0%, 100% { transform: translateY(0); }
@@ -356,7 +346,6 @@ a:focus-visible,
   .animate-spin-slow,
   .animate-levitate,
   .animate-text-shimmer,
-  .animate-blink-slow,
   .mic-ring {
     animation: none;
   }
@@ -412,8 +401,7 @@ a:focus-visible,
   .animate-float,
   .animate-float-gentle,
   .animate-bounce-gentle,
-  .animate-levitate,
-  .animate-blink-slow {
+  .animate-levitate {
     animation-duration: 6s;
   }
   

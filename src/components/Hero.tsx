@@ -1,38 +1,101 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronDown } from 'lucide-react';
 
+// Random interval constants (in milliseconds)
+const MIN_BLINK_INTERVAL = 3000;   // 3 seconds
+const MAX_BLINK_INTERVAL = 10000;  // 10 seconds
+const BLINK_DURATION = 120;        // 120ms
+const MIN_IDLE_WINK_INTERVAL = 5000; // 5 seconds
+const MAX_IDLE_WINK_INTERVAL = 10000; // 10 seconds
+const IDLE_WINK_DURATION = 800;    // 800ms
+
 const Hero: React.FC = () => {
   const [isWinking, setIsWinking] = useState(false);
   const [isIdleWinking, setIsIdleWinking] = useState(false);
-  const [isBlinkAnimationActive, setIsBlinkAnimationActive] = useState(false); // NOTE: false by default
-  const initialMount = useRef(true);
+  const [isBlinking, setIsBlinking] = useState(false);
+  
+  // Refs to manage timers
+  const blinkTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const idleWinkTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const blinkIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const idleWinkIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // On mount: enable blink after a tick, never on first frame
+  // Helper function to get random interval
+  const getRandomInterval = (min: number, max: number) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  };
+
+  // Clear all timers
+  const clearAllTimers = () => {
+    if (blinkTimeoutRef.current) clearTimeout(blinkTimeoutRef.current);
+    if (idleWinkTimeoutRef.current) clearTimeout(idleWinkTimeoutRef.current);
+    if (blinkIntervalRef.current) clearTimeout(blinkIntervalRef.current);
+    if (idleWinkIntervalRef.current) clearTimeout(idleWinkIntervalRef.current);
+  };
+
+  // Setup random blink interval
+  const setupBlinkInterval = () => {
+    if (isWinking || isIdleWinking) return;
+    
+    const randomInterval = getRandomInterval(MIN_BLINK_INTERVAL, MAX_BLINK_INTERVAL);
+    
+    blinkIntervalRef.current = setTimeout(() => {
+      if (!isWinking && !isIdleWinking) {
+        setIsBlinking(true);
+        blinkTimeoutRef.current = setTimeout(() => {
+          setIsBlinking(false);
+          setupBlinkInterval(); // Schedule next blink
+        }, BLINK_DURATION);
+      } else {
+        setupBlinkInterval(); // Try again if conditions aren't met
+      }
+    }, randomInterval);
+  };
+
+  // Setup random idle wink interval
+  const setupIdleWinkInterval = () => {
+    if (isWinking) return;
+    
+    const randomInterval = getRandomInterval(MIN_IDLE_WINK_INTERVAL, MAX_IDLE_WINK_INTERVAL);
+    
+    idleWinkIntervalRef.current = setTimeout(() => {
+      if (!isWinking) {
+        setIsIdleWinking(true);
+        idleWinkTimeoutRef.current = setTimeout(() => {
+          setIsIdleWinking(false);
+          setupIdleWinkInterval(); // Schedule next idle wink
+        }, IDLE_WINK_DURATION);
+      } else {
+        setupIdleWinkInterval(); // Try again if conditions aren't met
+      }
+    }, randomInterval);
+  };
+
+  // Initialize intervals on mount
   useEffect(() => {
-    if (initialMount.current) {
-      initialMount.current = false;
-      const timer = setTimeout(() => setIsBlinkAnimationActive(true), 80); // 80ms = enough for browsers
-      return () => clearTimeout(timer);
-    }
+    // Start with a small delay to avoid immediate animations
+    const initTimer = setTimeout(() => {
+      setupBlinkInterval();
+      setupIdleWinkInterval();
+    }, 1000);
+
+    return () => {
+      clearTimeout(initTimer);
+      clearAllTimers();
+    };
   }, []);
 
-  // Idle winking logic with bulletproof timing
+  // Restart intervals when winking state changes
   useEffect(() => {
-    const idleWinkInterval = setInterval(() => {
-      if (!isWinking) {
-        setIsBlinkAnimationActive(false); // PAUSE blink BEFORE wink
-        setIsIdleWinking(true);
-        setTimeout(() => {
-          setIsIdleWinking(false);
-          setTimeout(() => setIsBlinkAnimationActive(true), 300); // matches bulletproof timing
-        }, 800); // Wink duration
-      }
-    }, 6000);
-    return () => clearInterval(idleWinkInterval);
-  }, [isWinking]);
+    if (!isWinking && !isIdleWinking) {
+      setupBlinkInterval();
+    }
+    if (!isWinking) {
+      setupIdleWinkInterval();
+    }
+  }, [isWinking, isIdleWinking]);
 
   const handleScrollToNext = () => {
-    // Use browser's native smooth scrolling
     const nextSection = document.querySelector('#categories');
     if (nextSection) {
       nextSection.scrollIntoView({ behavior: 'smooth' });
@@ -40,17 +103,29 @@ const Hero: React.FC = () => {
   };
 
   const handleTurtleHover = () => {
-    setIsBlinkAnimationActive(false);
+    // Clear all timers and set winking state
+    clearAllTimers();
     setIsWinking(true);
     setIsIdleWinking(false);
+    setIsBlinking(false);
   };
 
   const handleTurtleLeave = () => {
     setIsWinking(false);
-    setTimeout(() => setIsBlinkAnimationActive(true), 300); // matches bulletproof timing
+    // Restart intervals after a brief delay
+    setTimeout(() => {
+      setupBlinkInterval();
+      setupIdleWinkInterval();
+    }, 300);
   };
 
-  const shouldShowWink = isWinking || isIdleWinking;
+  // Determine which image to show based on priority: Wink > Idle Wink > Blink > Open
+  let mascotImg = '/st-openeyes.png';
+  if (isWinking || isIdleWinking) {
+    mascotImg = '/st-winkeyes.png';
+  } else if (isBlinking) {
+    mascotImg = '/st-closedeyes.png'; // This image needs to exist
+  }
 
   return (
     <section className="hero-section relative min-h-screen pt-16 bg-gradient-to-br from-[#F3E8FF] to-[#E0F7FA] overflow-hidden">
@@ -77,7 +152,7 @@ const Hero: React.FC = () => {
             You already know... but ask anyway.
           </p>
           
-          {/* Mascot wrapper with bulletproof blinking */}
+          {/* Pure frame-swap mascot - single image element */}
           <div className="mb-8">
             <div
               className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 mx-auto animate-levitate cursor-pointer transition-all duration-300 hover:scale-105"
@@ -88,27 +163,13 @@ const Hero: React.FC = () => {
                 animationDelay: '0.5s'
               }}
             >
-              {/* Open-eyes wrapper */}
-              <div className={`absolute inset-0 transition-opacity duration-300 ${shouldShowWink ? 'opacity-0' : 'opacity-100'}`}>
-                <img
-                  src="/st-openeyes.png"
-                  alt="SoulTurtle mascot – eyes open"
-                  loading="eager"
-                  aria-hidden={shouldShowWink}
-                  className="w-full h-full object-contain animate-blink-slow"
-                  style={{ animationPlayState: isBlinkAnimationActive ? 'running' : 'paused' }}
-                />
-              </div>
-              {/* Wink wrapper */}
-              <div className={`absolute inset-0 transition-opacity duration-300 ${shouldShowWink ? 'opacity-100' : 'opacity-0'}`}>
-                <img
-                  src="/st-winkeyes.png"
-                  alt="SoulTurtle mascot – winking"
-                  loading="eager"
-                  aria-hidden={!shouldShowWink}
-                  className="w-full h-full object-contain"
-                />
-              </div>
+              <img
+                src={mascotImg}
+                alt="SoulTurtle mascot"
+                className="w-full h-full object-contain"
+                loading="eager"
+                draggable={false}
+              />
             </div>
           </div>
           
