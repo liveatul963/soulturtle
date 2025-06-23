@@ -93,7 +93,7 @@ body::-webkit-scrollbar {
   }
 }
 
-/* Subtle glass reflection shimmer animation for "Wink" */
+/* Text shimmer animation for "Wink" with better readability */
 @keyframes text-shimmer {
   0% {
     background-position: -200% 0;
@@ -251,14 +251,14 @@ body::-webkit-scrollbar {
   will-change: transform, opacity;
 }
 
-/* Subtle glass reflection shimmer utility class */
+/* Text shimmer utility class with better readability */
 .animate-text-shimmer {
-  background: linear-gradient(90deg, transparent 25%, rgba(255, 255, 255, 0.4) 50%, transparent 75%);
+  background: linear-gradient(90deg, #6B46C1 25%, #EC4899 50%, #6B46C1 75%);
   background-size: 200% 100%;
   -webkit-background-clip: text;
   background-clip: text;
-  animation: text-shimmer 2.5s ease-in-out infinite;
-  color: #374151; /* Keep the base text color visible */
+  color: transparent;
+  animation: text-shimmer 3s linear infinite;
 }
 
 /* Microphone ring class */
