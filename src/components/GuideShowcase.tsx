@@ -124,7 +124,8 @@ const GuideShowcase: React.FC = () => {
                 {/* Header */}
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center">
-                    <div className="text-3xl mr-4">
+                    {/* Enhanced Profile Picture - Circular background for emoji */}
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center overflow-hidden text-4xl mr-4 shadow-inner border-2 border-white/50">
                       {guide.avatar_emoji}
                     </div>
                     <div>
@@ -137,10 +138,11 @@ const GuideShowcase: React.FC = () => {
                     </div>
                   </div>
                   
+                  {/* Enhanced Availability Badge */}
                   <div className={`px-3 py-1 rounded-full text-xs font-medium ${
                     guide.is_available 
-                      ? 'bg-[#DDEDE3] text-green-700' 
-                      : 'bg-gray-100 text-gray-500'
+                      ? 'bg-green-100 text-green-700 shadow-md animate-pulse-slow' 
+                      : 'bg-yellow-100 text-yellow-700'
                   }`}>
                     {guide.is_available ? 'Available' : 'Busy'}
                   </div>

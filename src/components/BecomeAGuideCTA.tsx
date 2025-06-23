@@ -45,7 +45,7 @@ const BecomeAGuideCTA: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           {benefits.map((benefit, index) => (
             <TiltCard key={index}>
-              <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-6 text-center hover:bg-white/80 transition-all duration-300 shadow-lg border border-white/50">
+              <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-6 text-center hover:bg-white/80 transition-all duration-300 shadow-lg border border-white/50 min-h-[180px] flex flex-col justify-between">
                 <div className="mb-4">
                   <div className="w-12 h-12 mx-auto bg-gradient-to-br from-[#EAE6FB] to-[#FAD6CF] rounded-full flex items-center justify-center">
                     <benefit.icon className="w-6 h-6 text-gray-700" />
@@ -54,7 +54,7 @@ const BecomeAGuideCTA: React.FC = () => {
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">
                   {benefit.title}
                 </h3>
-                <p className="text-gray-600 text-sm font-normal">
+                <p className="text-gray-600 text-sm font-normal flex-grow">
                   {benefit.description}
                 </p>
               </div>
@@ -65,11 +65,11 @@ const BecomeAGuideCTA: React.FC = () => {
         {/* Main CTA with uniform styling */}
         <div className="text-center">
           <TiltCard>
-            <div className="bg-gradient-to-br from-[#EAE6FB] to-[#DDEDE3] rounded-3xl p-8 shadow-lg border border-white/50 max-w-2xl mx-auto">
+            <div className="bg-gradient-to-br from-[#EAE6FB] to-[#DDEDE3] rounded-3xl p-8 shadow-lg border border-white/50 max-w-2xl mx-auto min-h-[280px] flex flex-col justify-between">
               <h3 className="text-2xl font-semibold text-gray-800 mb-4">
                 Ready to Guide Others? 🐢
               </h3>
-              <p className="text-gray-700 mb-6 font-normal">
+              <p className="text-gray-700 mb-6 font-normal flex-grow">
                 We're looking for empathetic souls who can hold space for others' journeys. 
                 No formal credentials required - just genuine wisdom and a caring heart.
               </p>

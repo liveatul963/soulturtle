@@ -46,14 +46,14 @@ const Testimonials: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {testimonials.map((testimonial, index) => (
             <TiltCard key={index}>
-              <div className="group bg-white/60 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 h-full">
+              <div className="group bg-white/60 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 min-h-[280px] flex flex-col justify-between">
                 {/* Quote Icon */}
                 <div className="mb-4">
                   <Quote className="w-6 h-6 text-[#EAE6FB] transform rotate-180" />
                 </div>
 
-                {/* Testimonial Text */}
-                <p className="text-gray-700 mb-4 leading-relaxed italic text-sm font-normal">
+                {/* Testimonial Text with flex-grow */}
+                <p className="text-gray-700 mb-4 leading-relaxed italic text-sm font-normal flex-grow">
                   "{testimonial.text}"
                 </p>
 

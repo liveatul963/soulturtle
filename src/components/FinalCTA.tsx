@@ -41,18 +41,18 @@ const FinalCTA: React.FC = () => {
         {/* Secondary Actions with uniform CTA styling */}
         <div className="grid md:grid-cols-2 gap-4 md:gap-6 max-w-2xl mx-auto">
           <TiltCard>
-            <button className="group bg-gradient-to-r from-[#EAE6FB] to-[#FAD6CF] text-gray-800 shadow-lg hover:shadow-xl rounded-2xl p-6 text-center w-full transition-all duration-300 ease-in-out hover:scale-[1.02]">
+            <button className="group bg-gradient-to-r from-[#EAE6FB] to-[#FAD6CF] text-gray-800 shadow-lg hover:shadow-xl rounded-2xl p-6 text-center w-full transition-all duration-300 ease-in-out hover:scale-[1.02] min-h-[180px] flex flex-col justify-between">
               <div className="text-2xl mb-3">📱</div>
               <h3 className="font-medium text-gray-800 mb-2">Quick Chat</h3>
-              <p className="text-gray-600 text-sm font-normal">Start with a 15-minute conversation</p>
+              <p className="text-gray-600 text-sm font-normal flex-grow">Start with a 15-minute conversation</p>
             </button>
           </TiltCard>
 
           <TiltCard>
-            <button className="group bg-gradient-to-r from-[#EAE6FB] to-[#FAD6CF] text-gray-800 shadow-lg hover:shadow-xl rounded-2xl p-6 text-center w-full transition-all duration-300 ease-in-out hover:scale-[1.02]">
+            <button className="group bg-gradient-to-r from-[#EAE6FB] to-[#FAD6CF] text-gray-800 shadow-lg hover:shadow-xl rounded-2xl p-6 text-center w-full transition-all duration-300 ease-in-out hover:scale-[1.02] min-h-[180px] flex flex-col justify-between">
               <div className="text-2xl mb-3">🌙</div>
               <h3 className="font-medium text-gray-800 mb-2">Deep Dive</h3>
-              <p className="text-gray-600 text-sm font-normal">Full session for profound exploration</p>
+              <p className="text-gray-600 text-sm font-normal flex-grow">Full session for profound exploration</p>
             </button>
           </TiltCard>
         </div>
