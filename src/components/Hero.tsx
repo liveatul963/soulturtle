@@ -57,7 +57,7 @@ const Hero: React.FC = () => {
             <span className="text-gray-800">Real Guides.</span>
             <br />
             <span className="text-gray-800">With a </span>
-            <span className="text-purple-500 animate-text-shimmer">Wink</span>
+            <span className="animate-text-shimmer">Wink</span>
           </h1>
           
           {/* Levitating Turtle Mascot - Clean without shadows */}

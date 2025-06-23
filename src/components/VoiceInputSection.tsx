@@ -28,17 +28,16 @@ const VoiceInputSection: React.FC = () => {
         <button 
           id="micBtn" 
           onClick={handleMicClick}
-          className="relative w-16 h-16 rounded-full bg-white shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-105 hover:shadow-xl mx-auto group"
+          className={`relative mx-auto transition-all duration-300 hover:scale-105 ${
+            isListening 
+              ? 'mic-ring' 
+              : 'w-16 h-16 rounded-full bg-white shadow-lg flex items-center justify-center hover:shadow-xl'
+          }`}
           aria-label="Start voice recording"
         >
-          {/* Glowing ring effect when listening */}
-          {isListening && (
-            <div className="absolute inset-0 rounded-full bg-purple-400 opacity-75 animate-ping"></div>
-          )}
-          
           <Mic className={`w-6 h-6 relative z-10 transition-colors duration-300 ${
             isListening 
-              ? 'text-purple-600' 
+              ? 'text-white' 
               : 'text-[#1B2531] group-hover:text-purple-600'
           }`} />
         </button>
