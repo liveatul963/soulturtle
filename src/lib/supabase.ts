@@ -4,28 +4,28 @@ const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 
 if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error('Missing Supabase environment variables')
+  throw new Error('Missing Supabase environment variables. Please check your .env file.')
 }
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
-// Types for our database tables
+// Type definitions based on your database schema
 export interface Guide {
   id: string
-  created_at: string
+  created_at: string | null
   name: string
   specialty: string
   avatar_emoji: string
-  rating: number
-  sessions_completed: number
+  rating: number | null
+  sessions_completed: number | null
   bio: string
   approach: string
-  is_available: boolean
+  is_available: boolean | null
 }
 
 export interface Category {
   id: string
-  created_at: string
+  created_at: string | null
   title: string
   icon_name: string
   emoji: string
