@@ -20,17 +20,24 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-/* ─── NEW blink keyframe ─────────────────────────── */
-/* 1-2 frames of full opacity-off = natural eyelid close */
+/* fast, natural blink – no fades */
 @keyframes blink {
-  0%, 97%, 100% { opacity: 1; }   /* eyes open */
-  98%, 99%       { opacity: 0; }  /* eyes shut (quick) */
+  0%, 97%, 100% { opacity: 1; }
+  98%, 99%      { opacity: 0; }
 }
 
-/* ─── UPDATED levitate keyframe (no opacity) ─────── */
+.animate-blink-slow {            /* 1 blink every 6 s */
+  animation: blink 6s infinite;
+}
+
+/* vertical float only – no opacity */
 @keyframes levitate {
   0%, 100% { transform: translateY(0); }
   50%      { transform: translateY(-6px); }
+}
+
+.animate-levitate {
+  animation: levitate 4s ease-in-out infinite;
 }
 
 /* Enhanced scroll indicator animations */
@@ -221,6 +228,26 @@ body::-webkit-scrollbar {
   }
 }
 
+/* Text shimmer utility class with better readability */
+.animate-text-shimmer {
+  background: linear-gradient(90deg, #6B46C1 25%, #EC4899 50%, #6B46C1 75%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: text-shimmer 3s linear infinite;
+}
+
+/* SoulTurtle mic ring — pastel aura */
+.mic-ring {
+  background: linear-gradient(135deg, #EAE6FB 0%, #C7F0F7 100%);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  box-shadow:
+    0 0 15px rgba(200, 220, 255, 0.7),
+    0 0 30px rgba(150, 180, 255, 0.5),
+    0 0 45px rgba(100, 140, 255, 0.3);
+}
+
 .animate-float {
   animation: float 4s ease-in-out infinite;
   will-change: transform;
@@ -244,30 +271,6 @@ body::-webkit-scrollbar {
 .animate-shimmer-slow {
   animation: shimmer-slow 6s ease-in-out infinite;
   will-change: transform, opacity;
-}
-
-/* Utility classes if you use @apply in Tailwind config */
-.animate-levitate   { animation: levitate 4s ease-in-out infinite; }
-.animate-blink-slow { animation: blink 6s infinite; }
-
-/* Text shimmer utility class with better readability */
-.animate-text-shimmer {
-  background: linear-gradient(90deg, #6B46C1 25%, #EC4899 50%, #6B46C1 75%);
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: text-shimmer 3s linear infinite;
-}
-
-/* SoulTurtle mic ring — pastel aura */
-.mic-ring {
-  background: linear-gradient(135deg, #EAE6FB 0%, #C7F0F7 100%);
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  box-shadow:
-    0 0 15px rgba(200, 220, 255, 0.7),
-    0 0 30px rgba(150, 180, 255, 0.5),
-    0 0 45px rgba(100, 140, 255, 0.3);
 }
 
 .animate-glow-pulse {
