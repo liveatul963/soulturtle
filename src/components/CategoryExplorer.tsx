@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Heart, Brain, Compass, Star, Moon, Sun, Shield, Zap, TreePine, Loader2 } from 'lucide-react';
+import { Heart, Brain, Compass, Star, Moon, Sun, Shield, Zap, TreePine, Loader2, TriangleAlert } from 'lucide-react';
 import { supabase, type Category } from '../lib/supabase';
 import TiltCard from './TiltCard';
 
@@ -146,13 +146,17 @@ const CategoryExplorer: React.FC = () => {
           </div>
           
           <div className="flex justify-center items-center py-12">
-            <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md">
-              <p className="text-red-700 text-center font-normal">
-                Unable to load categories: {error}
+            <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-xl">
+              <div className="flex items-center mb-3">
+                <TriangleAlert className="w-5 h-5 text-red-600 mr-2" />
+                <h3 className="text-red-800 font-semibold">Unable to Load Categories</h3>
+              </div>
+              <p className="text-red-700 text-center font-normal mb-4">
+                {error}
               </p>
               <button 
                 onClick={() => window.location.reload()} 
-                className="mt-4 w-full px-4 py-2 bg-red-100 hover:bg-red-200 text-red-700 rounded-lg transition-all duration-300 ease-in-out hover:scale-[1.02] font-normal"
+                className="w-full px-4 py-2 bg-red-100 hover:bg-red-200 text-red-700 rounded-lg transition-all duration-300 ease-in-out hover:scale-[1.02] font-normal"
               >
                 Try Again
               </button>
@@ -193,7 +197,7 @@ const CategoryExplorer: React.FC = () => {
                 }}
               >
                 <div
-                  className={`group relative ${colorScheme.bg} ${colorScheme.hover} rounded-3xl p-6 cursor-pointer transition-all duration-500 hover:shadow-2xl border border-white/30 min-h-[180px] flex flex-col overflow-hidden`}
+                  className={`group relative ${colorScheme.bg} ${colorScheme.hover} rounded-3xl p-6 cursor-pointer transition-all duration-500 hover:shadow-2xl border border-white/30 min-h-[180px] flex flex-col justify-between overflow-hidden`}
                   style={{
                     boxShadow: '0 8px 32px rgba(0, 0, 0, 0.08)',
                   }}

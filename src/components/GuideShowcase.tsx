@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Star, MessageCircle, Calendar, Loader2 } from 'lucide-react';
+import { Star, MessageCircle, Calendar, Loader2, TriangleAlert } from 'lucide-react';
 import { supabase, type Guide } from '../lib/supabase';
 import TiltCard from './TiltCard';
 
@@ -75,13 +75,17 @@ const GuideShowcase: React.FC = () => {
           </div>
           
           <div className="flex justify-center items-center py-12">
-            <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md">
-              <p className="text-red-700 text-center font-normal">
-                Unable to load guides: {error}
+            <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-xl">
+              <div className="flex items-center mb-3">
+                <TriangleAlert className="w-5 h-5 text-red-600 mr-2" />
+                <h3 className="text-red-800 font-semibold">Unable to Load Guides</h3>
+              </div>
+              <p className="text-red-700 text-center font-normal mb-4">
+                {error}
               </p>
               <button 
                 onClick={() => window.location.reload()} 
-                className="mt-4 w-full px-4 py-2 bg-red-100 hover:bg-red-200 text-red-700 rounded-lg transition-all duration-300 ease-in-out hover:scale-[1.02] font-normal"
+                className="w-full px-4 py-2 bg-red-100 hover:bg-red-200 text-red-700 rounded-lg transition-all duration-300 ease-in-out hover:scale-[1.02] font-normal"
               >
                 Try Again
               </button>
@@ -116,7 +120,7 @@ const GuideShowcase: React.FC = () => {
                 transitionDelay: `${index * 100}ms`
               }}
             >
-              <div className="group bg-white/80 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50">
+              <div className="group bg-white/80 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 min-h-[480px] flex flex-col justify-between">
                 {/* Header */}
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center">
@@ -154,13 +158,13 @@ const GuideShowcase: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Bio */}
-                <p className="text-gray-700 mb-3 leading-relaxed text-sm font-normal">
+                {/* Bio - with flex-grow for uniform distribution */}
+                <p className="text-gray-700 mb-3 leading-relaxed text-sm font-normal flex-grow">
                   {guide.bio}
                 </p>
 
-                {/* Approach */}
-                <div className="mb-4">
+                {/* Approach - with flex-grow for uniform distribution */}
+                <div className="mb-4 flex-grow">
                   <span className="text-xs font-medium text-gray-600 uppercase tracking-wide">
                     Approach
                   </span>
