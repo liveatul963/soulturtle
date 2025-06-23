@@ -223,7 +223,7 @@ const CategoryExplorer: React.FC = () => {
                       <h3 className={`text-lg font-semibold mb-3 leading-tight ${colorScheme.accent}`}>
                         {category.title}
                       </h3>
-                      <p className="text-gray-700 text-sm leading-relaxed font-normal">
+                      <p className="text-gray-700 text-sm leading-relaxed font-normal flex-grow">
                         {category.description}
                       </p>
                     </div>
