@@ -1,0 +1,430 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Optimized CSS for maximum performance */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Bulletproof CSS for Blinking - eliminates flicker */
+@keyframes blink {
+  0%, 96%, 100% { opacity: 1; }
+  97%, 99%     { opacity: 0; }
+}
+
+.animate-blink-slow {
+  animation: blink 4.2s infinite;
+}
+
+/* vertical float only – no opacity */
+@keyframes levitate {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+
+.animate-levitate {
+  animation: levitate 4s ease-in-out infinite;
+}
+
+/* Enhanced scroll indicator animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes float-gentle {
+  0%, 100% { 
+    transform: translateY(0px) scale(1);
+    opacity: 0.8;
+  }
+  50% { 
+    transform: translateY(-6px) scale(1.05);
+    opacity: 1;
+  }
+}
+
+@keyframes bounce-gentle {
+  0%, 100% { 
+    transform: translateY(0px);
+    opacity: 0.7;
+  }
+  25% { 
+    transform: translateY(-2px);
+    opacity: 0.9;
+  }
+  50% { 
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+  75% { 
+    transform: translateY(-2px);
+    opacity: 0.9;
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { 
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes shimmer-slow {
+  0% {
+    transform: translateX(-100%) rotate(45deg);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateX(200%) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+/* Text shimmer animation for "Wink" with better readability */
+@keyframes text-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Glowing ring animation for microphone */
+@keyframes pulseGlow {
+  0% {
+    box-shadow:
+      0 0 10px rgba(173, 216, 230, 0.4),
+      0 0 20px rgba(0, 212, 255, 0.3),
+      0 0 30px rgba(0, 212, 255, 0.2);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow:
+      0 0 20px rgba(173, 216, 230, 0.6),
+      0 0 30px rgba(0, 212, 255, 0.5),
+      0 0 40px rgba(0, 212, 255, 0.4);
+    transform: scale(1.05);
+  }
+  100% {
+    box-shadow:
+      0 0 10px rgba(173, 216, 230, 0.4),
+      0 0 20px rgba(0, 212, 255, 0.3),
+      0 0 30px rgba(0, 212, 255, 0.2);
+    transform: scale(1);
+  }
+}
+
+/* Enhanced hover animations - GPU accelerated */
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.4);
+    transform: scale(1.02);
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* Subtle breathing animation for background elements */
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.1;
+  }
+  50% {
+    transform: scale(1.05) rotate(1deg);
+    opacity: 0.15;
+  }
+}
+
+/* Gentle drift animation */
+@keyframes drift {
+  0%, 100% {
+    transform: translateX(0px) translateY(0px);
+  }
+  25% {
+    transform: translateX(2px) translateY(-2px);
+  }
+  50% {
+    transform: translateX(-1px) translateY(-4px);
+  }
+  75% {
+    transform: translateX(-2px) translateY(-1px);
+  }
+}
+
+/* Timeline animations */
+@keyframes timeline-flow {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes timeline-shimmer {
+  0% {
+    transform: translateY(-200%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.6;
+  }
+  80% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(200%);
+    opacity: 0;
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Text shimmer utility class with better readability */
+.animate-text-shimmer {
+  background: linear-gradient(90deg, #6B46C1 25%, #EC4899 50%, #6B46C1 75%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: text-shimmer 3s linear infinite;
+}
+
+/* SoulTurtle mic ring — pastel aura */
+.mic-ring {
+  background: linear-gradient(135deg, #EAE6FB 0%, #C7F0F7 100%);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  box-shadow:
+    0 0 15px rgba(200, 220, 255, 0.7),
+    0 0 30px rgba(150, 180, 255, 0.5),
+    0 0 45px rgba(100, 140, 255, 0.3);
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-float-gentle {
+  animation: float-gentle 4s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.animate-bounce-gentle {
+  animation: bounce-gentle 3s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.animate-shimmer-slow {
+  animation: shimmer-slow 6s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
+  will-change: transform, box-shadow;
+}
+
+.animate-ripple {
+  animation: ripple 0.6s ease-out;
+  will-change: transform, opacity;
+}
+
+.animate-breathe {
+  animation: breathe 8s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.animate-drift {
+  animation: drift 12s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-timeline-flow {
+  animation: timeline-flow 4s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.animate-timeline-shimmer {
+  animation: timeline-shimmer 6s ease-in-out infinite;
+  will-change: transform, opacity;
+  animation-delay: 1s;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+  will-change: transform;
+}
+
+/* Performance optimized button */
+.btn-primary {
+  @apply px-8 py-4 bg-gradient-to-r from-purple-400 to-pink-400 text-white font-semibold rounded-full;
+  @apply hover:from-purple-500 hover:to-pink-500 transform hover:scale-[1.02] transition-all duration-300;
+  @apply focus:outline-none focus:ring-4 focus:ring-purple-300;
+}
+
+/* Smooth transitions for all interactive elements */
+button, a, [role="button"] {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Enhanced focus states for accessibility */
+button:focus-visible,
+a:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid #EAE6FB;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(234, 230, 251, 0.3);
+}
+
+/* GPU acceleration for performance */
+.transform-gpu {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Accessibility - respect user preferences */
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-float-gentle,
+  .animate-bounce-gentle,
+  .animate-pulse,
+  .animate-pulse-slow,
+  .animate-shimmer-slow,
+  .animate-bounce,
+  .animate-ping,
+  .animate-glow-pulse,
+  .animate-ripple,
+  .animate-breathe,
+  .animate-drift,
+  .animate-timeline-flow,
+  .animate-timeline-shimmer,
+  .animate-spin-slow,
+  .animate-levitate,
+  .animate-text-shimmer,
+  .animate-blink-slow,
+  .mic-ring {
+    animation: none;
+  }
+  
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+  
+  /* Disable tilt effects for reduced motion */
+  .transform-gpu {
+    transform: none !important;
+  }
+}
+
+/* Clean focus styles */
+*:focus {
+  outline: 2px solid #EAE6FB;
+  outline-offset: 2px;
+}
+
+/* High contrast support */
+@media (prefers-contrast: high) {
+  .bg-gradient-to-br,
+  .bg-gradient-to-b,
+  .bg-gradient-to-r {
+    background: white;
+    color: black;
+    border: 2px solid black;
+  }
+}
+
+/* Performance optimizations */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Apple-style navigation backdrop */
+.nav-backdrop {
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 768px) {
+  /* Reduce animation complexity on mobile */
+  .animate-float,
+  .animate-float-gentle,
+  .animate-bounce-gentle,
+  .animate-levitate,
+  .animate-blink-slow {
+    animation-duration: 6s;
+  }
+  
+  /* Ensure proper spacing on mobile */
+  .grid {
+    gap: 1rem;
+  }
+  
+  /* Mobile padding adjustments */
+  .px-6 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
