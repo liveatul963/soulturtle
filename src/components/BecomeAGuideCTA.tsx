@@ -62,7 +62,7 @@ const BecomeAGuideCTA: React.FC = () => {
           ))}
         </div>
 
-        {/* Main CTA */}
+        {/* Main CTA with uniform styling */}
         <div className="text-center">
           <TiltCard>
             <div className="bg-gradient-to-br from-[#EAE6FB] to-[#DDEDE3] rounded-3xl p-8 shadow-lg border border-white/50 max-w-2xl mx-auto">
@@ -73,7 +73,7 @@ const BecomeAGuideCTA: React.FC = () => {
                 We're looking for empathetic souls who can hold space for others' journeys. 
                 No formal credentials required - just genuine wisdom and a caring heart.
               </p>
-              <button className="group px-10 py-4 bg-white text-gray-800 font-semibold rounded-full hover:shadow-xl transition-all duration-300 ease-in-out hover:scale-[1.02] border border-white/70">
+              <button className="group px-10 py-4 bg-gradient-to-r from-[#EAE6FB] to-[#FAD6CF] text-gray-800 font-semibold rounded-full hover:shadow-xl hover:scale-[1.02] transition-all duration-300 ease-in-out border border-white/70">
                 <span className="flex items-center justify-center">
                   Become a Guide
                   <ArrowRight className="ml-3 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />

@@ -25,7 +25,7 @@ const SessionOptions: React.FC = () => {
               <p className="text-gray-600 text-sm mb-6 font-normal">
                 Perfect for quick guidance or when you need clarity on a specific question.
               </p>
-              <button className="bg-[#1B2531] text-white py-3 px-6 rounded-full hover:opacity-90 transition-all duration-300 ease-in-out hover:scale-[1.02] font-medium">
+              <button className="bg-gradient-to-r from-[#EAE6FB] to-[#FAD6CF] text-gray-800 font-medium py-3 px-6 rounded-full hover:shadow-lg hover:scale-[1.02] transition-all duration-300 ease-in-out">
                 Book Now
               </button>
             </div>
@@ -43,7 +43,7 @@ const SessionOptions: React.FC = () => {
               <p className="text-gray-600 text-sm mb-6 font-normal">
                 For profound exploration and transformation. Space to truly unfold.
               </p>
-              <button className="bg-[#1B2531] text-white py-3 px-6 rounded-full hover:opacity-90 transition-all duration-300 ease-in-out hover:scale-[1.02] font-medium">
+              <button className="bg-gradient-to-r from-[#EAE6FB] to-[#FAD6CF] text-gray-800 font-medium py-3 px-6 rounded-full hover:shadow-lg hover:scale-[1.02] transition-all duration-300 ease-in-out">
                 Book Now
               </button>
             </div>

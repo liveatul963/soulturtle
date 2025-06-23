@@ -224,9 +224,9 @@ const CategoryExplorer: React.FC = () => {
                       </p>
                     </div>
 
-                    {/* Enhanced hover effect */}
+                    {/* Enhanced hover effect with uniform CTA styling */}
                     <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 mt-4">
-                      <div className={`inline-flex items-center font-medium text-sm bg-white/70 px-4 py-2 rounded-full border border-white/50 shadow-sm ${colorScheme.accent}`}>
+                      <div className="inline-flex items-center bg-gradient-to-r from-[#EAE6FB] to-[#FAD6CF] text-gray-800 font-medium px-4 py-2 rounded-full border border-white/50 shadow-sm hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
                         Explore <span className="ml-2 group-hover:translate-x-1 transition-transform duration-300">→</span>
                       </div>
                     </div>
@@ -240,12 +240,12 @@ const CategoryExplorer: React.FC = () => {
           })}
         </div>
 
-        {/* Call to action */}
+        {/* Call to action with uniform styling */}
         <div className="text-center mt-10">
           <p className="text-gray-600 mb-4 text-lg font-normal">
             Can't find what you're looking for? Our guides work across all areas of life.
           </p>
-          <button className="group px-10 py-4 bg-gradient-to-r from-white/90 to-gray-50/90 rounded-full text-gray-700 font-medium hover:from-white hover:to-gray-50 transition-all duration-300 ease-in-out hover:scale-[1.02] shadow-lg border border-white/50 hover:shadow-xl">
+          <button className="group px-10 py-4 bg-gradient-to-r from-[#EAE6FB] to-[#FAD6CF] rounded-full text-gray-700 font-medium hover:shadow-xl transition-all duration-300 ease-in-out hover:scale-[1.02] shadow-lg border border-white/50">
             <span className="flex items-center">
               Browse All Guides
               <span className="ml-2 group-hover:translate-x-1 transition-transform duration-300">✨</span>

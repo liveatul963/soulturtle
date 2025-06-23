@@ -93,6 +93,16 @@ body::-webkit-scrollbar {
   }
 }
 
+/* Text shimmer animation for "Wink" */
+@keyframes text-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
 /* Enhanced hover animations - GPU accelerated */
 @keyframes glow-pulse {
   0%, 100% {
@@ -210,6 +220,22 @@ body::-webkit-scrollbar {
   will-change: transform, opacity;
 }
 
+/* Clean levitating animation class - no shadows */
+.animate-levitate {
+  animation: levitate 5s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* Text shimmer utility class */
+.animate-text-shimmer {
+  background: linear-gradient(90deg, #EAE6FB 0%, #FAD6CF 50%, #EAE6FB 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: text-shimmer 3s linear infinite;
+}
+
 .animate-glow-pulse {
   animation: glow-pulse 2s ease-in-out infinite;
   will-change: transform, box-shadow;
@@ -244,12 +270,6 @@ body::-webkit-scrollbar {
 .animate-spin-slow {
   animation: spin-slow 8s linear infinite;
   will-change: transform;
-}
-
-/* Clean levitating animation class - no shadows */
-.animate-levitate {
-  animation: levitate 5s ease-in-out infinite;
-  will-change: transform, opacity;
 }
 
 /* Performance optimized button */
@@ -297,7 +317,8 @@ a:focus-visible,
   .animate-timeline-flow,
   .animate-timeline-shimmer,
   .animate-spin-slow,
-  .animate-levitate {
+  .animate-levitate,
+  .animate-text-shimmer {
     animation: none;
   }
   
