@@ -6,14 +6,7 @@ const Hero: React.FC = () => {
   const [isIdleWinking, setIsIdleWinking] = useState(false);
 
   useEffect(() => {
-    // 1. Pre-load both mascot images to prevent 404 race conditions
-    const preloadImages = ["/st-openeyes.png", "/st-winkeyes.png"];
-    preloadImages.forEach(src => {
-      const img = new Image();
-      img.src = src;
-    });
-
-    // 2. Set up periodic idle winking
+    // Set up periodic idle winking
     const idleWinkInterval = setInterval(() => {
       if (!isWinking) { // Only wink if not already winking from hover
         setIsIdleWinking(true);
@@ -24,7 +17,7 @@ const Hero: React.FC = () => {
     }, 6000); // Wink every 6 seconds
 
     return () => clearInterval(idleWinkInterval);
-  }, []); // Empty dependency array - set up once on mount
+  }, [isWinking]); // Add isWinking to dependency array
 
   const handleScrollToNext = () => {
     // Use browser's native smooth scrolling
@@ -67,21 +60,35 @@ const Hero: React.FC = () => {
             <span className="animate-text-shimmer">Wink</span>
           </h1>
           
-          {/* Levitating Turtle Mascot - Clean without shadows */}
+          {/* Levitating Turtle Mascot - Optimized with dual images */}
           <div className="mb-8">
-            <img
-              src={shouldShowWink ? "/st-winkeyes.png" : "/st-openeyes.png"}
-              alt="SoulTurtle Mascot"
-              loading="lazy"
-              className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 mx-auto animate-levitate cursor-pointer transition-all duration-300 hover:scale-105"
+            <div 
+              className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 mx-auto animate-levitate cursor-pointer transition-all duration-300 hover:scale-105"
               onMouseEnter={handleTurtleHover}
               onMouseLeave={handleTurtleLeave}
-              onError={(e) => {
-                // Fallback to open eyes image to prevent infinite error loops
-                e.currentTarget.src = "/st-openeyes.png";
-              }}
-              aria-hidden="true"
-            />
+            >
+              {/* Open eyes image */}
+              <img
+                src="/st-openeyes.png"
+                alt="SoulTurtle - Open Eyes"
+                className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-500 ease-in-out ${
+                  shouldShowWink ? 'opacity-0' : 'opacity-100'
+                }`}
+                loading="eager"
+                aria-hidden={shouldShowWink}
+              />
+
+              {/* Wink eyes image */}
+              <img
+                src="/st-winkeyes.png"
+                alt="SoulTurtle - Winking"
+                className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-500 ease-in-out ${
+                  shouldShowWink ? 'opacity-100' : 'opacity-0'
+                }`}
+                loading="eager"
+                aria-hidden={!shouldShowWink}
+              />
+            </div>
           </div>
 
           {/* Subheadline - positioned after mascot */}
