@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Star, MessageCircle, ArrowRight, Loader2 } from 'lucide-react';
+import { Star, MessageCircle, Calendar, Loader2 } from 'lucide-react';
 import { supabase, type Guide } from '../lib/supabase';
 import TiltCard from './TiltCard';
 
@@ -116,14 +116,9 @@ const GuideShowcase: React.FC = () => {
                 transitionDelay: `${index * 100}ms`
               }}
             >
-              <div className="group bg-white/80 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 relative">
-                {/* Pricing Badge */}
-                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-gray-700 border border-white/50">
-                  $49/session
-                </div>
-
+              <div className="group bg-white/80 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50">
                 {/* Header */}
-                <div className="flex items-start justify-between mb-4 pr-16">
+                <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center">
                     <div className="text-3xl mr-4">
                       {guide.avatar_emoji}
@@ -174,20 +169,23 @@ const GuideShowcase: React.FC = () => {
                   </p>
                 </div>
 
-                {/* Updated CTA */}
+                {/* CTA with pricing badge */}
                 <button 
-                  className={`w-full transition-all duration-300 ease-in-out text-sm ${
+                  className={`w-full py-3 rounded-2xl font-medium transition-all duration-300 ease-in-out text-sm ${
                     guide.is_available
-                      ? 'text-[#1B2531] font-medium underline hover:no-underline flex items-center justify-center group'
-                      : 'text-gray-400 cursor-not-allowed'
+                      ? 'bg-gradient-to-r from-[#EAE6FB] to-[#FAD6CF] text-gray-800 hover:shadow-lg hover:scale-[1.02]'
+                      : 'bg-gray-100 text-gray-400 cursor-not-allowed'
                   }`}
                   disabled={!guide.is_available}
                 >
                   {guide.is_available ? (
-                    <>
+                    <span className="flex items-center justify-center">
+                      <Calendar className="w-4 h-4 mr-2" />
                       Book Now
-                      <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
-                    </>
+                      <div className="ml-2 px-2 py-1 bg-white/70 rounded-full text-xs font-medium">
+                        $49/session
+                      </div>
+                    </span>
                   ) : (
                     'Currently Unavailable'
                   )}
