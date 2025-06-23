@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Heart, Brain, Compass, Star, Moon, Sun, Shield, Zap, TreePine, Loader2, TriangleAlert } from 'lucide-react';
+import { Heart, Brain, Compass, Star, Moon, Sun, Shield, Zap, TreePine, Loader2, AlertTriangle as TriangleAlert } from 'lucide-react';
 import { supabase, type Category } from '../lib/supabase';
 import TiltCard from './TiltCard';
 
