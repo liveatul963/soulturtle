@@ -60,33 +60,31 @@ const Hero: React.FC = () => {
             <span className="animate-text-shimmer">Wink</span>
           </h1>
           
-          {/* Levitating Turtle Mascot - Optimized with dual images */}
+          {/* Levitating Turtle Mascot - Optimized with dual images and smooth blink */}
           <div className="mb-8">
             <div 
               className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 mx-auto animate-levitate cursor-pointer transition-all duration-300 hover:scale-105"
               onMouseEnter={handleTurtleHover}
               onMouseLeave={handleTurtleLeave}
             >
-              {/* Open eyes image */}
+              {/* Open eyes image with slow blink */}
               <img
                 src="/st-openeyes.png"
-                alt="SoulTurtle - Open Eyes"
-                className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-500 ease-in-out ${
-                  shouldShowWink ? 'opacity-0' : 'opacity-100'
-                }`}
+                alt="SoulTurtle mascot – eyes open"
                 loading="eager"
                 aria-hidden={shouldShowWink}
+                className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-300
+                  ${shouldShowWink ? 'opacity-0' : 'opacity-100 animate-blink-slow'}`}
               />
 
-              {/* Wink eyes image */}
+              {/* Wink image */}
               <img
                 src="/st-winkeyes.png"
-                alt="SoulTurtle - Winking"
-                className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-500 ease-in-out ${
-                  shouldShowWink ? 'opacity-100' : 'opacity-0'
-                }`}
+                alt="SoulTurtle mascot – winking"
                 loading="eager"
                 aria-hidden={!shouldShowWink}
+                className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-300
+                  ${shouldShowWink ? 'opacity-100' : 'opacity-0'}`}
               />
             </div>
           </div>

@@ -20,6 +20,19 @@ body::-webkit-scrollbar {
   display: none;
 }
 
+/* ─── NEW blink keyframe ─────────────────────────── */
+/* 1-2 frames of full opacity-off = natural eyelid close */
+@keyframes blink {
+  0%, 97%, 100% { opacity: 1; }   /* eyes open */
+  98%, 99%       { opacity: 0; }  /* eyes shut (quick) */
+}
+
+/* ─── UPDATED levitate keyframe (no opacity) ─────── */
+@keyframes levitate {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+
 /* Enhanced scroll indicator animations */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
@@ -78,18 +91,6 @@ body::-webkit-scrollbar {
   100% {
     transform: translateX(200%) rotate(45deg);
     opacity: 0;
-  }
-}
-
-/* Clean levitating animation for the mascot - no shadows */
-@keyframes levitate {
-  0%, 100% { 
-    transform: translateY(0px);
-    opacity: 0.95;
-  }
-  50% { 
-    transform: translateY(-20px);
-    opacity: 1;
   }
 }
 
@@ -245,11 +246,9 @@ body::-webkit-scrollbar {
   will-change: transform, opacity;
 }
 
-/* Clean levitating animation class - no shadows */
-.animate-levitate {
-  animation: levitate 5s ease-in-out infinite;
-  will-change: transform, opacity;
-}
+/* Utility classes if you use @apply in Tailwind config */
+.animate-levitate   { animation: levitate 4s ease-in-out infinite; }
+.animate-blink-slow { animation: blink 6s infinite; }
 
 /* Text shimmer utility class with better readability */
 .animate-text-shimmer {
@@ -354,6 +353,7 @@ a:focus-visible,
   .animate-spin-slow,
   .animate-levitate,
   .animate-text-shimmer,
+  .animate-blink-slow,
   .mic-ring {
     animation: none;
   }
@@ -409,7 +409,8 @@ a:focus-visible,
   .animate-float,
   .animate-float-gentle,
   .animate-bounce-gentle,
-  .animate-levitate {
+  .animate-levitate,
+  .animate-blink-slow {
     animation-duration: 6s;
   }
   
