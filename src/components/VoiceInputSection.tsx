@@ -4,19 +4,18 @@ import { Mic } from 'lucide-react';
 const VoiceInputSection: React.FC = () => {
   const [isListening, setIsListening] = useState(false);
 
+  /** Toggle listening (demo: auto-stop after 3 s) */
   const handleMicClick = () => {
-    setIsListening(!isListening);
-    
-    // Auto-stop listening after 3 seconds for demo purposes
     if (!isListening) {
-      setTimeout(() => {
-        setIsListening(false);
-      }, 3000);
+      setIsListening(true);
+      setTimeout(() => setIsListening(false), 3000);
+    } else {
+      setIsListening(false);
     }
   };
 
   return (
-    <section className="bg-gradient-to-b from-purple-50 to-teal-50 py-20 text-center">
+    <section className="bg-gradient-to-b from-[#EAE6FB] to-[#C7F0F7] py-20 text-center">
       <div className="max-w-4xl mx-auto px-6">
         <h2 className="font-serif text-3xl md:text-4xl text-[#1B2531] mb-4">
           Let your voice guide you.
@@ -24,26 +23,40 @@ const VoiceInputSection: React.FC = () => {
         <p className="text-gray-600 text-lg md:text-xl mb-8 font-normal">
           Your energy, your tone, your truth.
         </p>
-        
-        <button 
-          id="micBtn" 
+
+        {/* ─── Mic Button ─────────────────────────────────────────── */}
+        <button
+          id="micBtn"
           onClick={handleMicClick}
-          className={`relative mx-auto transition-all duration-300 hover:scale-105 ${
-            isListening 
-              ? 'mic-ring' 
-              : 'w-16 h-16 rounded-full bg-white shadow-lg flex items-center justify-center hover:shadow-xl'
-          }`}
-          aria-label="Start voice recording"
+          aria-label={isListening ? "Stop voice recording" : "Start voice recording"}
+          className="relative mx-auto transition-transform duration-300 hover:scale-105 focus:outline-none"
         >
-          <Mic className={`w-6 h-6 relative z-10 transition-colors duration-300 ${
-            isListening 
-              ? 'text-white' 
-              : 'text-[#1B2531] group-hover:text-purple-600'
-          }`} />
+          {/* Glowing ring when listening */}
+          {isListening && (
+            <div className="absolute inset-0 rounded-full animate-ping border border-white/20 opacity-30" />
+          )}
+
+          {/* Button core */}
+          <div
+            className={`flex items-center justify-center rounded-full ${
+              isListening
+                ? "w-20 h-20 mic-ring shadow-xl"
+                : "w-20 h-20 bg-gradient-to-br from-[#EAE6FB] to-[#C7F0F7] shadow-xl border-2 border-white/30"
+            }`}
+          >
+            <Mic
+              className={`w-7 h-7 transition-colors duration-300 ${
+                isListening ? "text-white" : "text-[#1B2531]"
+              }`}
+            />
+          </div>
         </button>
-        
-        <p className="text-sm text-gray-500 mt-4 font-normal">
-          {isListening ? 'Listening...' : 'Click to share what\'s on your heart'}
+
+        {/* Status text */}
+        <p className="text-sm text-gray-600 font-light tracking-wide italic mt-4">
+          {isListening
+            ? "Listening…"
+            : "Click to share what's on your heart"}
         </p>
       </div>
     </section>
