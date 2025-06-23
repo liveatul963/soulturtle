@@ -47,7 +47,7 @@ const Hero: React.FC = () => {
   const shouldShowWink = isWinking || isIdleWinking;
 
   return (
-    <section className="hero-section relative min-h-screen bg-gradient-to-br from-[#F3E8FF] to-[#E0F7FA] overflow-hidden">
+    <section className="hero-section relative min-h-screen pt-16 bg-gradient-to-br from-[#F3E8FF] to-[#E0F7FA] overflow-hidden">
       {/* Optimized floating elements */}
       <div className="absolute inset-0 opacity-15 pointer-events-none">
         <div className="absolute top-20 left-10 text-3xl animate-float-gentle">🐢</div>
@@ -72,6 +72,7 @@ const Hero: React.FC = () => {
             <img
               src={shouldShowWink ? "/st-winkeyes.png" : "/st-openeyes.png"}
               alt="SoulTurtle Mascot"
+              loading="lazy"
               className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 mx-auto animate-levitate cursor-pointer transition-all duration-300 hover:scale-105"
               onMouseEnter={handleTurtleHover}
               onMouseLeave={handleTurtleLeave}
