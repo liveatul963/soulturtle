@@ -13,13 +13,28 @@ const GuideShowcase: React.FC = () => {
     const fetchGuides = async () => {
       try {
         setLoading(true);
+        setError(null);
+        
+        // Test the connection first
+        const { data: testData, error: testError } = await supabase
+          .from('guides')
+          .select('count')
+          .limit(1);
+
+        if (testError) {
+          console.error('Supabase connection test failed:', testError);
+          throw new Error(`Database connection failed: ${testError.message}`);
+        }
+
+        // If connection test passes, fetch the actual data
         const { data, error } = await supabase
           .from('guides')
           .select('*')
           .order('rating', { ascending: false });
 
         if (error) {
-          throw error;
+          console.error('Error fetching guides:', error);
+          throw new Error(`Failed to fetch guides: ${error.message}`);
         }
 
         setGuides(data || []);
@@ -27,8 +42,12 @@ const GuideShowcase: React.FC = () => {
         // Trigger fade-in animation after data loads
         setTimeout(() => setCardsVisible(true), 100);
       } catch (err) {
-        console.error('Error fetching guides:', err);
-        setError(err instanceof Error ? err.message : 'Failed to load guides');
+        console.error('Error in fetchGuides:', err);
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError('An unexpected error occurred while loading guides');
+        }
       } finally {
         setLoading(false);
       }
@@ -152,11 +171,11 @@ const GuideShowcase: React.FC = () => {
                 <div className="flex items-center space-x-6 mb-4 text-sm text-gray-600">
                   <div className="flex items-center">
                     <Star className="w-4 h-4 mr-1 fill-yellow-400 text-yellow-400" />
-                    <span className="font-medium">{guide.rating}</span>
+                    <span className="font-medium">{guide.rating || 4.5}</span>
                   </div>
                   <div className="flex items-center">
                     <MessageCircle className="w-4 h-4 mr-1" />
-                    <span className="font-normal">{guide.sessions_completed} sessions</span>
+                    <span className="font-normal">{guide.sessions_completed || 0} sessions</span>
                   </div>
                 </div>
 
