@@ -93,13 +93,38 @@ body::-webkit-scrollbar {
   }
 }
 
-/* Text shimmer animation for "Wink" */
+/* Text shimmer animation for "Wink" with better readability */
 @keyframes text-shimmer {
   0% {
     background-position: -200% 0;
   }
   100% {
     background-position: 200% 0;
+  }
+}
+
+/* Glowing ring animation for microphone */
+@keyframes pulseGlow {
+  0% {
+    box-shadow:
+      0 0 10px rgba(173, 216, 230, 0.4),
+      0 0 20px rgba(0, 212, 255, 0.3),
+      0 0 30px rgba(0, 212, 255, 0.2);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow:
+      0 0 20px rgba(173, 216, 230, 0.6),
+      0 0 30px rgba(0, 212, 255, 0.5),
+      0 0 40px rgba(0, 212, 255, 0.4);
+    transform: scale(1.05);
+  }
+  100% {
+    box-shadow:
+      0 0 10px rgba(173, 216, 230, 0.4),
+      0 0 20px rgba(0, 212, 255, 0.3),
+      0 0 30px rgba(0, 212, 255, 0.2);
+    transform: scale(1);
   }
 }
 
@@ -226,14 +251,31 @@ body::-webkit-scrollbar {
   will-change: transform, opacity;
 }
 
-/* Text shimmer utility class */
+/* Text shimmer utility class with better readability */
 .animate-text-shimmer {
-  background: linear-gradient(90deg, #EAE6FB 0%, #FAD6CF 50%, #EAE6FB 100%);
+  background: linear-gradient(90deg, #6B46C1 25%, #EC4899 50%, #6B46C1 75%);
   background-size: 200% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   animation: text-shimmer 3s linear infinite;
+}
+
+/* Microphone ring class */
+.mic-ring {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  background: radial-gradient(circle at center, #d4f1ff 30%, #a6e3ff 70%);
+  box-shadow: 
+    0 0 10px rgba(173, 216, 230, 0.5),
+    0 0 20px rgba(0, 212, 255, 0.4),
+    0 0 30px rgba(0, 212, 255, 0.3);
+  animation: pulseGlow 1.5s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .animate-glow-pulse {
@@ -318,7 +360,8 @@ a:focus-visible,
   .animate-timeline-shimmer,
   .animate-spin-slow,
   .animate-levitate,
-  .animate-text-shimmer {
+  .animate-text-shimmer,
+  .mic-ring {
     animation: none;
   }
   
