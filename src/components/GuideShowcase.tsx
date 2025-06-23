@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Star, MessageCircle, Calendar, Loader2, TriangleAlert } from 'lucide-react';
+import { Star, MessageCircle, Calendar, Loader2, AlertTriangle as TriangleAlert } from 'lucide-react';
 import { supabase, type Guide } from '../lib/supabase';
 import TiltCard from './TiltCard';
 
