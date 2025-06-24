@@ -6,6 +6,15 @@ export default {
       fontFamily: {
         'serif': ['DM Serif Display', 'serif'],
       },
+      animation: {
+        'cursor-blink': 'cursor-blink 1s steps(2) infinite',
+      },
+      keyframes: {
+        'cursor-blink': {
+          '0%': { opacity: '1' },
+          '100%': { opacity: '0' },
+        }
+      }
     },
   },
   plugins: [],
