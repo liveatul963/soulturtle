@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronDown, Search, Pointer } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import TypewriterText from './TypewriterText';
 
 // Random interval constants (in milliseconds)
@@ -137,29 +137,21 @@ const Hero: React.FC = () => {
 
           {/* Typing effect text below mascot */}
           <div className="mb-12">
-            <p className="text-xl sm:text-2xl md:text-3xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-normal">
-              Let your voice guide you...
+            <p className="text-xl sm:text-2xl md:text-3xl text-gray-700 max-w-2xl mx-auto leading-relaxed font-normal min-h-[3rem] flex items-center justify-center">
+              <TypewriterText 
+                text="You already know...@@PAUSE@@but ask anyway."
+                speed={80}
+                delay={500}
+                loop={true}
+                loopDelay={10000}
+              />
             </p>
           </div>
           
-          {/* Two CTA Buttons */}
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8">
-            {/* Reveal My Guide Button - Peach to Pink Gradient */}
-            <button className="group px-10 py-4 bg-gradient-to-r from-[#FAD6CF] to-[#EAE6FB] text-gray-800 font-semibold rounded-full text-lg shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:scale-[1.02] relative overflow-hidden border border-white/50">
-              <span className="flex items-center justify-center">
-                <Pointer className="w-5 h-5 mr-2" />
-                Reveal My Guide
-              </span>
-            </button>
-
-            {/* Explore Guides Button - White with Gray Border */}
-            <button className="group px-10 py-4 bg-white text-gray-700 font-semibold rounded-full text-lg shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:scale-[1.02] border-2 border-gray-200 hover:border-gray-300">
-              <span className="flex items-center justify-center">
-                <Search className="w-5 h-5 mr-2" />
-                Explore Guides
-              </span>
-            </button>
-          </div>
+          <button className="group px-12 py-6 bg-white/80 text-gray-800 font-semibold rounded-full text-xl shadow-md hover:shadow-lg transition-all duration-300 ease-in-out hover:scale-[1.02] relative overflow-hidden border border-white/70">
+            <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[#EAE6FB] to-[#FAD6CF] opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md"></span>
+            <span className="relative z-10 font-semibold text-gray-800">Reveal My Guide</span>
+          </button>
         </div>
       </div>
 

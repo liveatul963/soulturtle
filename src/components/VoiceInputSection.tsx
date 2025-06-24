@@ -17,6 +17,9 @@ const VoiceInputSection: React.FC = () => {
   return (
     <section className="bg-gradient-to-b from-[#EAE6FB] to-[#C7F0F7] py-20 text-center">
       <div className="max-w-4xl mx-auto px-6">
+        <h2 className="font-serif text-3xl md:text-4xl text-[#1B2531] mb-4">
+          Let your voice guide you.
+        </h2>
         <p className="text-gray-600 text-lg md:text-xl mb-8 font-normal">
           Your energy, your tone, your truth.
         </p>
