@@ -21,6 +21,8 @@ export interface Guide {
   bio: string
   approach: string
   is_available: boolean | null
+  gender?: string | null
+  level?: string | null
 }
 
 export interface Category {
