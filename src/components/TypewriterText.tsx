@@ -155,5 +155,3 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({
 };
 
 export default TypewriterText;
-
-export default TypewriterText
