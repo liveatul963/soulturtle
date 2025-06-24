@@ -113,7 +113,7 @@ const Hero: React.FC = () => {
             <span className="animate-text-shimmer">Wink</span>
           </h1>
           
-          <p className="text-xl sm:text-2xl md:text-3xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed font-normal">
+          <p className="text-xl sm:text-2xl md:text-3xl text-gray-700 mb-16 max-w-2xl mx-auto leading-relaxed font-normal">
             You already know... but ask anyway.
           </p>
           
