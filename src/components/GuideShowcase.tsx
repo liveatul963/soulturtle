@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Star, MessageCircle, Calendar, Loader2, AlertTriangle as TriangleAlert } from 'lucide-react';
+import { Star, Calendar, Loader2, AlertTriangle as TriangleAlert, Flame } from 'lucide-react';
 import { supabase, type Guide } from '../lib/supabase';
 import TiltCard from './TiltCard';
 
@@ -139,53 +139,58 @@ const GuideShowcase: React.FC = () => {
                 transitionDelay: `${index * 100}ms`
               }}
             >
-              <div className="group bg-white/80 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 h-[500px] flex flex-col justify-between">
-                {/* Header */}
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center">
-                    {/* Enhanced Profile Picture - Circular background for emoji */}
-                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center overflow-hidden text-4xl mr-4 shadow-inner border-2 border-white/50">
-                      {guide.avatar_emoji}
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-semibold text-gray-800 mb-1">
-                        {guide.name}
-                      </h3>
-                      <p className="text-[#4A5568] font-medium text-sm">
-                        {guide.specialty}
-                      </p>
-                    </div>
-                  </div>
-                  
-                  {/* Enhanced Availability Badge - More Prominent */}
-                  <div className={`px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg border-2 ${
-                    guide.is_available 
-                      ? 'bg-green-500 text-white border-green-400 shadow-green-200 animate-pulse-slow' 
-                      : 'bg-yellow-500 text-white border-yellow-400 shadow-yellow-200'
-                  }`}>
-                    {guide.is_available ? '● Available' : '● Busy'}
+              <div className="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 min-h-[520px] flex flex-col justify-between">
+                {/* Availability Badge - Positioned outside card */}
+                <div className={`absolute top-[-10px] right-[-10px] z-20 px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg border-2 ${
+                  guide.is_available 
+                    ? 'bg-green-500 text-white border-green-400 shadow-green-200 animate-pulse-slow' 
+                    : 'bg-rose-500 text-white border-rose-400 shadow-rose-200'
+                }`}>
+                  {guide.is_available ? 'Available' : 'Busy'}
+                </div>
+
+                {/* Profile Image with Emoji Badge */}
+                <div className="relative w-28 h-28 rounded-full mx-auto mb-4 border-4 border-white shadow-lg overflow-hidden flex-shrink-0">
+                  <img
+                    src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                    alt={guide.name}
+                    className="w-full h-full object-cover"
+                  />
+                  {/* Emoji Badge */}
+                  <div className="absolute bottom-0 right-0 w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-md border-2 border-white text-xl">
+                    {guide.avatar_emoji}
                   </div>
                 </div>
 
-                {/* Stats */}
-                <div className="flex items-center space-x-6 mb-4 text-sm text-gray-600">
+                {/* Name and Specialty - Centered */}
+                <div className="text-center mb-4">
+                  <h3 className="text-xl font-semibold text-gray-800 mb-1">
+                    {guide.name}
+                  </h3>
+                  <p className="text-[#4A5568] font-medium text-sm">
+                    {guide.specialty}
+                  </p>
+                </div>
+
+                {/* Stats - Centered */}
+                <div className="flex items-center justify-center space-x-6 mb-4 text-sm text-gray-600">
                   <div className="flex items-center">
                     <Star className="w-4 h-4 mr-1 fill-yellow-400 text-yellow-400" />
                     <span className="font-medium">{guide.rating || 4.5}</span>
                   </div>
                   <div className="flex items-center">
-                    <MessageCircle className="w-4 h-4 mr-1" />
+                    <Flame className="w-4 h-4 mr-1 fill-orange-400 text-orange-400" />
                     <span className="font-normal">{guide.sessions_completed || 0} sessions</span>
                   </div>
                 </div>
 
-                {/* Bio - with flex-grow for uniform distribution */}
-                <p className="text-gray-700 mb-3 leading-relaxed text-sm font-normal flex-grow">
+                {/* Bio - Centered with flex-grow */}
+                <p className="text-gray-700 mb-3 leading-relaxed text-sm font-normal flex-grow text-center">
                   {guide.bio}
                 </p>
 
-                {/* Approach - with flex-grow for uniform distribution */}
-                <div className="mb-4 flex-grow">
+                {/* Approach - Centered with flex-grow */}
+                <div className="mb-4 flex-grow text-center">
                   <span className="text-xs font-medium text-gray-600 uppercase tracking-wide">
                     Approach
                   </span>
