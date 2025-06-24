@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, useState, useEffect } from 'react';
 
 interface TiltCardProps {
   children: React.ReactNode;
@@ -7,6 +7,7 @@ interface TiltCardProps {
   perspective?: number;
   scale?: number;
   speed?: number;
+  style?: React.CSSProperties;
 }
 
 const TiltCard: React.FC<TiltCardProps> = ({
@@ -15,13 +16,32 @@ const TiltCard: React.FC<TiltCardProps> = ({
   maxTilt = 10,
   perspective = 1000,
   scale = 1.02,
-  speed = 300
+  speed = 300,
+  style
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number>();
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile device based on screen width and touch capability
+  useEffect(() => {
+    const checkMobile = () => {
+      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      const isSmallScreen = window.innerWidth <= 768;
+      setIsMobile(isTouchDevice && isSmallScreen);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
+    // Skip tilt effect on mobile devices
+    if (isMobile || !cardRef.current) return;
 
     const card = cardRef.current;
     const rect = card.getBoundingClientRect();
@@ -51,10 +71,11 @@ const TiltCard: React.FC<TiltCardProps> = ({
         card.style.transition = `transform ${speed}ms cubic-bezier(0.03, 0.98, 0.52, 0.99)`;
       }
     });
-  }, [maxTilt, perspective, scale, speed]);
+  }, [maxTilt, perspective, scale, speed, isMobile]);
 
   const handleMouseLeave = useCallback(() => {
-    if (!cardRef.current) return;
+    // Skip tilt effect on mobile devices
+    if (isMobile || !cardRef.current) return;
 
     // Cancel any pending animation frame
     if (animationRef.current) {
@@ -67,10 +88,10 @@ const TiltCard: React.FC<TiltCardProps> = ({
         cardRef.current.style.transition = `transform ${speed}ms cubic-bezier(0.03, 0.98, 0.52, 0.99)`;
       }
     });
-  }, [speed]);
+  }, [speed, isMobile]);
 
   // Cleanup animation frame on unmount
-  React.useEffect(() => {
+  useEffect(() => {
     return () => {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
@@ -81,11 +102,12 @@ const TiltCard: React.FC<TiltCardProps> = ({
   return (
     <div
       ref={cardRef}
-      className={`transform-gpu will-change-transform ${className}`}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+      className={`${!isMobile ? 'transform-gpu will-change-transform' : ''} ${className}`}
+      onMouseMove={!isMobile ? handleMouseMove : undefined}
+      onMouseLeave={!isMobile ? handleMouseLeave : undefined}
       style={{
-        transformStyle: 'preserve-3d',
+        transformStyle: !isMobile ? 'preserve-3d' : 'flat',
+        ...style
       }}
     >
       {children}
