@@ -25,11 +25,14 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({
   const [showCursor, setShowCursor] = useState(true);
 
   const PAUSE_MARKER = '@@PAUSE@@';
-  const PAUSE_DURATION = 500;
+  const PAUSE_DURATION = 1200; // Increased for more breathing room
+  const SPACE_AFTER_PAUSE = ' '; // Add space after pause
 
-  // Process text to handle pause markers
+  // Process text to handle pause markers with spaces
   const processedText = useMemo(() => {
-    const parts = text.split(PAUSE_MARKER);
+    // Replace pause markers with space + pause indicator
+    const textWithSpaces = text.replace(/@@PAUSE@@/g, ' @@PAUSE@@');
+    const parts = textWithSpaces.split('@@PAUSE@@');
     const result: Array<{ text: string; isPause: boolean }> = [];
     
     parts.forEach((part, index) => {
@@ -93,7 +96,7 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({
       const part = processedText[i];
       if (part.isPause) {
         if (charCount === currentIndex) {
-          // We're at a pause marker
+          // We're at a pause marker - longer pause for breathing
           const pauseTimer = setTimeout(() => {
             setCurrentIndex(prev => prev + 1);
           }, PAUSE_DURATION);
