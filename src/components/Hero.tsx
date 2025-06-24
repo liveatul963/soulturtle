@@ -117,10 +117,10 @@ const Hero: React.FC = () => {
             You already know... but ask anyway.
           </p>
           
-          {/* Pure frame-swap mascot - single image element */}
+          {/* Pure frame-swap mascot - single image element without hover enlargement */}
           <div className="mb-8">
             <div
-              className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 mx-auto animate-levitate cursor-pointer transition-all duration-300 hover:scale-105"
+              className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 mx-auto animate-levitate cursor-pointer transition-all duration-300"
               onMouseEnter={handleTurtleHover}
               onMouseLeave={handleTurtleLeave}
               style={{ 
