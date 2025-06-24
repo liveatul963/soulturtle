@@ -62,10 +62,10 @@ const BecomeAGuideCTA: React.FC = () => {
           ))}
         </div>
 
-        {/* Main CTA with uniform styling */}
+        {/* Enhanced Main CTA with subtle glow animation */}
         <div className="text-center">
           <TiltCard>
-            <div className="bg-gradient-to-br from-[#EAE6FB] to-[#DDEDE3] rounded-3xl p-8 shadow-lg border border-white/50 max-w-2xl mx-auto min-h-[280px] flex flex-col justify-between">
+            <div className="bg-gradient-to-br from-[#FAD6CF] to-[#EAE6FB] rounded-3xl p-8 shadow-2xl border-2 border-white/70 max-w-2xl mx-auto min-h-[280px] flex flex-col justify-between animate-subtle-glow">
               <h3 className="text-2xl font-semibold text-gray-800 mb-4">
                 Ready to Guide Others? 🐢
               </h3>
