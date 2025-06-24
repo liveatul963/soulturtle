@@ -4,6 +4,8 @@ interface TypewriterTextProps {
   text: string;
   speed?: number;
   delay?: number;
+  loop?: boolean;
+  loopDelay?: number;
   className?: string;
   onComplete?: () => void;
 }
@@ -12,12 +14,15 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({
   text,
   speed = 50,
   delay = 0,
+  loop = false,
+  loopDelay = 3000,
   className = '',
   onComplete
 }) => {
   const [displayedText, setDisplayedText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTyping, setIsTyping] = useState(false);
+  const [showCursor, setShowCursor] = useState(true);
 
   useEffect(() => {
     // Start typing after delay
@@ -29,26 +34,48 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({
   }, [delay]);
 
   useEffect(() => {
-    if (!isTyping || currentIndex >= text.length) {
-      if (currentIndex >= text.length && onComplete) {
+    if (!isTyping) return;
+
+    if (currentIndex >= text.length) {
+      // Typing is complete
+      if (onComplete) {
         onComplete();
       }
-      return;
+
+      if (loop) {
+        // Hide cursor briefly, then restart after loopDelay
+        setShowCursor(false);
+        const loopTimer = setTimeout(() => {
+          setDisplayedText('');
+          setCurrentIndex(0);
+          setShowCursor(true);
+        }, loopDelay);
+
+        return () => clearTimeout(loopTimer);
+      } else {
+        // Hide cursor after typing is complete
+        const cursorTimer = setTimeout(() => {
+          setShowCursor(false);
+        }, 1000);
+
+        return () => clearTimeout(cursorTimer);
+      }
+    } else {
+      // Continue typing
+      const timer = setTimeout(() => {
+        setDisplayedText(text.slice(0, currentIndex + 1));
+        setCurrentIndex(currentIndex + 1);
+      }, speed);
+
+      return () => clearTimeout(timer);
     }
-
-    const timer = setTimeout(() => {
-      setDisplayedText(text.slice(0, currentIndex + 1));
-      setCurrentIndex(currentIndex + 1);
-    }, speed);
-
-    return () => clearTimeout(timer);
-  }, [currentIndex, text, speed, isTyping, onComplete]);
+  }, [currentIndex, text, speed, isTyping, onComplete, loop, loopDelay]);
 
   return (
     <span className={className}>
       {displayedText}
-      {isTyping && currentIndex < text.length && (
-        <span className="animate-pulse text-gray-400">|</span>
+      {showCursor && isTyping && (
+        <span className="animate-pulse text-gray-400 ml-1">|</span>
       )}
     </span>
   );
