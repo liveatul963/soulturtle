@@ -45,7 +45,7 @@ const BecomeAGuideCTA: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           {benefits.map((benefit, index) => (
             <TiltCard key={index}>
-              <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-6 text-center hover:bg-white/80 transition-all duration-300 shadow-lg border border-white/50 min-h-[180px] flex flex-col justify-between">
+              <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-6 text-center hover:bg-white/80 transition-all duration-300 shadow-lg border border-white/50 h-[180px] flex flex-col justify-between">
                 <div className="mb-4">
                   <div className="w-12 h-12 mx-auto bg-gradient-to-br from-[#EAE6FB] to-[#FAD6CF] rounded-full flex items-center justify-center">
                     <benefit.icon className="w-6 h-6 text-gray-700" />
@@ -65,7 +65,7 @@ const BecomeAGuideCTA: React.FC = () => {
         {/* Main CTA with aligned styling and subtle glow */}
         <div className="text-center">
           <TiltCard>
-            <div className="bg-gradient-to-br from-[#EAE6FB] to-[#DDEDE3] rounded-3xl p-8 shadow-lg border border-white/50 max-w-2xl mx-auto min-h-[280px] flex flex-col justify-between">
+            <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-8 shadow-lg border border-white/50 max-w-2xl mx-auto h-[280px] flex flex-col justify-between">
               <h3 className="text-2xl font-semibold text-gray-800 mb-4">
                 Ready to Guide Others? 🐢
               </h3>
