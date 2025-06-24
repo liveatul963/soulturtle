@@ -2,9 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { ChevronDown } from 'lucide-react';
 
 // Random interval constants (in milliseconds)
-const MIN_BLINK_INTERVAL = 3000;   // 3 seconds
-const MAX_BLINK_INTERVAL = 10000;  // 10 seconds
-const BLINK_DURATION = 120;        // 120ms
 const MIN_IDLE_WINK_INTERVAL = 5000; // 5 seconds
 const MAX_IDLE_WINK_INTERVAL = 10000; // 10 seconds
 const IDLE_WINK_DURATION = 800;    // 800ms
@@ -12,12 +9,9 @@ const IDLE_WINK_DURATION = 800;    // 800ms
 const Hero: React.FC = () => {
   const [isWinking, setIsWinking] = useState(false);
   const [isIdleWinking, setIsIdleWinking] = useState(false);
-  const [isBlinking, setIsBlinking] = useState(false);
   
   // Refs to manage timers
-  const blinkTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const idleWinkTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const blinkIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const idleWinkIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   // Helper function to get random interval
@@ -27,29 +21,8 @@ const Hero: React.FC = () => {
 
   // Clear all timers
   const clearAllTimers = () => {
-    if (blinkTimeoutRef.current) clearTimeout(blinkTimeoutRef.current);
     if (idleWinkTimeoutRef.current) clearTimeout(idleWinkTimeoutRef.current);
-    if (blinkIntervalRef.current) clearTimeout(blinkIntervalRef.current);
     if (idleWinkIntervalRef.current) clearTimeout(idleWinkIntervalRef.current);
-  };
-
-  // Setup random blink interval
-  const setupBlinkInterval = () => {
-    if (isWinking || isIdleWinking) return;
-    
-    const randomInterval = getRandomInterval(MIN_BLINK_INTERVAL, MAX_BLINK_INTERVAL);
-    
-    blinkIntervalRef.current = setTimeout(() => {
-      if (!isWinking && !isIdleWinking) {
-        setIsBlinking(true);
-        blinkTimeoutRef.current = setTimeout(() => {
-          setIsBlinking(false);
-          setupBlinkInterval(); // Schedule next blink
-        }, BLINK_DURATION);
-      } else {
-        setupBlinkInterval(); // Try again if conditions aren't met
-      }
-    }, randomInterval);
   };
 
   // Setup random idle wink interval
@@ -75,7 +48,6 @@ const Hero: React.FC = () => {
   useEffect(() => {
     // Start with a small delay to avoid immediate animations
     const initTimer = setTimeout(() => {
-      setupBlinkInterval();
       setupIdleWinkInterval();
     }, 1000);
 
@@ -87,13 +59,10 @@ const Hero: React.FC = () => {
 
   // Restart intervals when winking state changes
   useEffect(() => {
-    if (!isWinking && !isIdleWinking) {
-      setupBlinkInterval();
-    }
     if (!isWinking) {
       setupIdleWinkInterval();
     }
-  }, [isWinking, isIdleWinking]);
+  }, [isWinking]);
 
   const handleScrollToNext = () => {
     const nextSection = document.querySelector('#categories');
@@ -107,24 +76,20 @@ const Hero: React.FC = () => {
     clearAllTimers();
     setIsWinking(true);
     setIsIdleWinking(false);
-    setIsBlinking(false);
   };
 
   const handleTurtleLeave = () => {
     setIsWinking(false);
     // Restart intervals after a brief delay
     setTimeout(() => {
-      setupBlinkInterval();
       setupIdleWinkInterval();
     }, 300);
   };
 
-  // Determine which image to show based on priority: Wink > Idle Wink > Blink > Open
+  // Determine which image to show: Wink or Open
   let mascotImg = '/st-openeyes.png';
   if (isWinking || isIdleWinking) {
     mascotImg = '/st-winkeyes.png';
-  } else if (isBlinking) {
-    mascotImg = '/st-closedeyes.png'; // This image needs to exist
   }
 
   return (
