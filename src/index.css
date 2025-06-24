@@ -479,11 +479,6 @@ a:focus-visible,
     padding-right: 1rem;
   }
   
-  /* Disable tilt effects on mobile for better performance */
-  .transform-gpu {
-    transform: none !important;
-  }
-  
   /* Optimize touch targets for mobile */
   button, [role="button"] {
     min-height: 44px;
