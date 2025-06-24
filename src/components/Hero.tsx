@@ -139,11 +139,11 @@ const Hero: React.FC = () => {
           <div className="mb-12">
             <p className="text-xl sm:text-2xl md:text-3xl text-gray-700 max-w-2xl mx-auto leading-relaxed font-normal min-h-[3rem] flex items-center justify-center">
               <TypewriterText 
-                text="You already know... but ask anyway."
+                text="You already know...@@PAUSE@@but ask anyway."
                 speed={80}
                 delay={500}
                 loop={true}
-                loopDelay={4000}
+                loopDelay={10000}
               />
             </p>
           </div>
