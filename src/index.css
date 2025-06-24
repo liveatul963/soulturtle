@@ -440,6 +440,26 @@ a:focus-visible,
 
 /* Mobile-specific optimizations */
 @media (max-width: 768px) {
+  /* Remove backdrop-filter blur effects on mobile to prevent iOS Safari blur issues */
+  .backdrop-blur-sm,
+  .backdrop-blur,
+  .backdrop-blur-md,
+  .backdrop-blur-lg,
+  .backdrop-blur-xl,
+  .backdrop-blur-2xl,
+  .backdrop-blur-3xl {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  
+  /* Ensure cards maintain their background without blur */
+  .bg-white\/60,
+  .bg-white\/70,
+  .bg-white\/80,
+  .bg-white\/90 {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+  }
+  
   /* Reduce animation complexity on mobile */
   .animate-float,
   .animate-float-gentle,
@@ -457,5 +477,33 @@ a:focus-visible,
   .px-6 {
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+  
+  /* Disable tilt effects on mobile for better performance */
+  .transform-gpu {
+    transform: none !important;
+  }
+  
+  /* Optimize touch targets for mobile */
+  button, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Additional mobile optimizations for older iOS devices */
+@media (max-width: 768px) and (-webkit-min-device-pixel-ratio: 2) {
+  /* Further optimize for retina displays on older devices */
+  .shadow-lg,
+  .shadow-xl,
+  .shadow-2xl {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  }
+  
+  /* Simplify gradients for better performance */
+  .bg-gradient-to-br,
+  .bg-gradient-to-b,
+  .bg-gradient-to-r {
+    background: linear-gradient(135deg, #EAE6FB 0%, #FAD6CF 100%) !important;
   }
 }
