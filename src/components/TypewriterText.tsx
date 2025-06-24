@@ -148,10 +148,12 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({
     <span className={className}>
       {displayedText}
       {showCursor && (
-        <span className="animate-pulse text-gray-400 ml-1">|</span>
+        <span className="animate-cursor-blink text-gray-400 ml-1">|</span>
       )}
     </span>
   );
 };
 
 export default TypewriterText;
+
+export default TypewriterText
