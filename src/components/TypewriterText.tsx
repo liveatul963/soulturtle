@@ -29,6 +29,10 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({
   const PAUSE_MARKER = '@@PAUSE@@';
   const PAUSE_DURATION = 500; // 500ms pause
 
+  // Pre-process text to handle pause markers more efficiently
+  const textSegments = text.split(PAUSE_MARKER);
+  const cleanText = text.replace(new RegExp(PAUSE_MARKER, 'g'), '');
+
   useEffect(() => {
     // Start typing after delay
     const startTimer = setTimeout(() => {
@@ -55,48 +59,46 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({
           setCurrentIndex(0);
           setShowCursor(true);
         }, loopDelay);
-
         return () => clearTimeout(loopTimer);
       } else {
         // Hide cursor after typing is complete
         const cursorTimer = setTimeout(() => {
           setShowCursor(false);
         }, 1000);
-
         return () => clearTimeout(cursorTimer);
       }
     } else {
       // Check if we've reached a pause marker
       const remainingText = text.slice(currentIndex);
       if (remainingText.startsWith(PAUSE_MARKER)) {
-        // We've hit a pause marker
+        // We've hit a pause marker - pause without updating display
         setIsPaused(true);
-        setShowCursor(false);
         
         const pauseTimer = setTimeout(() => {
           setIsPaused(false);
-          setShowCursor(true);
           // Skip past the pause marker
           setCurrentIndex(currentIndex + PAUSE_MARKER.length);
         }, PAUSE_DURATION);
-
+        
         return () => clearTimeout(pauseTimer);
       } else {
         // Continue typing normally
         const timer = setTimeout(() => {
-          setDisplayedText(text.slice(0, currentIndex + 1).replace(new RegExp(PAUSE_MARKER, 'g'), ''));
+          // Update displayed text by showing clean text up to current position
+          const cleanIndex = text.slice(0, currentIndex + 1).replace(new RegExp(PAUSE_MARKER, 'g'), '').length;
+          setDisplayedText(cleanText.slice(0, cleanIndex));
           setCurrentIndex(currentIndex + 1);
         }, speed);
-
+        
         return () => clearTimeout(timer);
       }
     }
-  }, [currentIndex, text, speed, isTyping, onComplete, loop, loopDelay, isPaused]);
+  }, [currentIndex, text, cleanText, speed, isTyping, onComplete, loop, loopDelay, isPaused]);
 
   return (
     <span className={className}>
       {displayedText}
-      {showCursor && isTyping && !isPaused && (
+      {showCursor && isTyping && (
         <span className="animate-pulse text-gray-400 ml-1">|</span>
       )}
     </span>
