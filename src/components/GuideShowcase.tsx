@@ -9,6 +9,47 @@ const GuideShowcase: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [cardsVisible, setCardsVisible] = useState(false);
 
+  // Gender-based profile images
+  const getProfileImage = (guide: Guide, index: number) => {
+    // If gender field exists in database, use it; otherwise alternate based on index
+    const gender = guide.gender || (index % 2 === 0 ? 'male' : 'female');
+    
+    const profileImages = {
+      male: [
+        'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=500',
+        'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=500',
+        'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=500'
+      ],
+      female: [
+        'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=500',
+        'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=500',
+        'https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg?auto=compress&cs=tinysrgb&w=500'
+      ],
+      'non-binary': [
+        'https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=500'
+      ]
+    };
+
+    const imageArray = profileImages[gender as keyof typeof profileImages] || profileImages.male;
+    return imageArray[index % imageArray.length];
+  };
+
+  // Get level emoji badge
+  const getLevelBadge = (guide: Guide) => {
+    // If level field exists in database, use it; otherwise use avatar_emoji
+    if (guide.level) {
+      const levelEmojis = {
+        'beginner': '🌱',
+        'intermediate': '⭐',
+        'pro': '🔥',
+        'master': '👑',
+        'expert': '💎'
+      };
+      return levelEmojis[guide.level as keyof typeof levelEmojis] || guide.avatar_emoji;
+    }
+    return guide.avatar_emoji;
+  };
+
   useEffect(() => {
     const fetchGuides = async () => {
       try {
@@ -71,7 +112,7 @@ const GuideShowcase: React.FC = () => {
           
           <div className="flex justify-center items-center py-12">
             <div className="flex items-center space-x-3">
-              <Loader2 className="w-6 h-6 animate-spin text-gray-600" />
+              <Loader2 className="w-6 h-6 animate-spin text-[#EAE6FB]" />
               <span className="text-gray-600 font-normal">Loading guides...</span>
             </div>
           </div>
@@ -139,32 +180,37 @@ const GuideShowcase: React.FC = () => {
                 transitionDelay: `${index * 100}ms`
               }}
             >
-              <div className="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 min-h-[520px] flex flex-col justify-between">
-                {/* Availability Badge - Positioned outside card */}
-                <div className={`absolute top-[-10px] right-[-10px] z-20 px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg border-2 ${
+              <div className="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 min-h-[540px] flex flex-col justify-between">
+                {/* Available Indicator - Inside card at top-right */}
+                <div className={`absolute top-4 right-4 px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg border-2 ${
                   guide.is_available 
-                    ? 'bg-green-500 text-white border-green-400 shadow-green-200 animate-pulse-slow' 
+                    ? 'bg-green-500 text-white border-green-400 shadow-green-200 animate-pulse-fast' 
                     : 'bg-rose-500 text-white border-rose-400 shadow-rose-200'
                 }`}>
                   {guide.is_available ? 'Available' : 'Busy'}
                 </div>
 
-                {/* Profile Image with Emoji Badge */}
-                <div className="relative w-28 h-28 rounded-full mx-auto mb-4 border-4 border-white shadow-lg overflow-hidden flex-shrink-0">
-                  <img
-                    src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                    alt={guide.name}
-                    className="w-full h-full object-cover"
-                  />
-                  {/* Emoji Badge */}
-                  <div className="absolute bottom-0 right-0 w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-md border-2 border-white text-xl">
-                    {guide.avatar_emoji}
+                {/* Profile Image Container - Larger size */}
+                <div className="relative w-36 h-36 mx-auto mb-6 flex-shrink-0">
+                  {/* Main Profile Image */}
+                  <div className="w-full h-full rounded-full border-4 border-white shadow-lg overflow-hidden">
+                    <img
+                      src={getProfileImage(guide, index)}
+                      alt={guide.name}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                  
+                  {/* Emoji Badge - Outside circle at bottom-right */}
+                  <div className="absolute -bottom-2 -right-2 w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-lg border-4 border-white text-xl">
+                    {getLevelBadge(guide)}
                   </div>
                 </div>
 
-                {/* Name and Specialty - Centered */}
-                <div className="text-center mb-4">
-                  <h3 className="text-xl font-semibold text-gray-800 mb-1">
+                {/* Name and Specialty Section */}
+                <div className="text-center mb-6">
+                  <h3 className="text-xl font-semibold text-gray-800 mb-2">
                     {guide.name}
                   </h3>
                   <p className="text-[#4A5568] font-medium text-sm">
@@ -172,8 +218,8 @@ const GuideShowcase: React.FC = () => {
                   </p>
                 </div>
 
-                {/* Stats - Centered */}
-                <div className="flex items-center justify-center space-x-6 mb-4 text-sm text-gray-600">
+                {/* Stats Section */}
+                <div className="flex items-center justify-center space-x-6 mb-6 text-sm text-gray-600">
                   <div className="flex items-center">
                     <Star className="w-4 h-4 mr-1 fill-yellow-400 text-yellow-400" />
                     <span className="font-medium">{guide.rating || 4.5}</span>
@@ -184,22 +230,24 @@ const GuideShowcase: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Bio - Centered with flex-grow */}
-                <p className="text-gray-700 mb-3 leading-relaxed text-sm font-normal flex-grow text-center">
-                  {guide.bio}
-                </p>
+                {/* Bio Section */}
+                <div className="mb-6 flex-grow">
+                  <p className="text-gray-700 leading-relaxed text-sm font-normal text-center">
+                    {guide.bio}
+                  </p>
+                </div>
 
-                {/* Approach - Centered with flex-grow */}
-                <div className="mb-4 flex-grow text-center">
-                  <span className="text-xs font-medium text-gray-600 uppercase tracking-wide">
+                {/* Approach Section */}
+                <div className="mb-6 text-center">
+                  <span className="text-xs font-medium text-gray-600 uppercase tracking-wide block mb-2">
                     Approach
                   </span>
-                  <p className="text-gray-600 mt-1 italic text-sm font-light">
+                  <p className="text-gray-600 italic text-sm font-light">
                     {guide.approach}
                   </p>
                 </div>
 
-                {/* CTA with pricing badge */}
+                {/* CTA Button */}
                 <button 
                   className={`w-full py-3 rounded-2xl font-medium transition-all duration-300 ease-in-out text-sm ${
                     guide.is_available

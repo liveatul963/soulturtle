@@ -77,6 +77,19 @@ body::-webkit-scrollbar {
   }
 }
 
+@keyframes pulse-fast {
+  0%, 100% { 
+    opacity: 0.6;
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
+  }
+  50% { 
+    opacity: 1;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.8), 0 0 30px rgba(34, 197, 94, 0.6);
+  }
+}
+
 @keyframes shimmer-slow {
   0% {
     transform: translateX(-100%) rotate(45deg);
@@ -258,6 +271,11 @@ body::-webkit-scrollbar {
   will-change: transform, opacity;
 }
 
+.animate-pulse-fast {
+  animation: pulse-fast 1.5s ease-in-out infinite;
+  will-change: transform, opacity, box-shadow;
+}
+
 .animate-shimmer-slow {
   animation: shimmer-slow 6s ease-in-out infinite;
   will-change: transform, opacity;
@@ -334,6 +352,7 @@ a:focus-visible,
   .animate-bounce-gentle,
   .animate-pulse,
   .animate-pulse-slow,
+  .animate-pulse-fast,
   .animate-shimmer-slow,
   .animate-bounce,
   .animate-ping,
