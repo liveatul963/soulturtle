@@ -141,7 +141,9 @@ const Hero: React.FC = () => {
               <TypewriterText 
                 text="You already know... but ask anyway."
                 speed={80}
-                delay={1500}
+                delay={500}
+                loop={true}
+                loopDelay={4000}
               />
             </p>
           </div>
