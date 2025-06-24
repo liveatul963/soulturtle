@@ -46,18 +46,19 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({
 
     // Check if we've finished all segments
     if (currentSegmentIndex >= totalSegments) {
+      setIsTyping(false); // Stop typing
       if (onComplete) onComplete();
       
       if (loop) {
-        setShowCursor(false);
         const loopTimer = setTimeout(() => {
           setDisplayedText('');
           setCurrentSegmentIndex(0);
           setCurrentCharIndex(0);
-          setShowCursor(true);
+          setIsTyping(true); // Restart typing
         }, loopDelay);
         return () => clearTimeout(loopTimer);
       } else {
+        // Hide cursor after completion
         const cursorTimer = setTimeout(() => {
           setShowCursor(false);
         }, 1000);
@@ -76,14 +77,14 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({
         
         const pauseTimer = setTimeout(() => {
           setIsPaused(false);
-          setCurrentSegmentIndex(currentSegmentIndex + 1);
+          setCurrentSegmentIndex(prev => prev + 1);
           setCurrentCharIndex(0);
         }, PAUSE_DURATION);
         
         return () => clearTimeout(pauseTimer);
       } else {
-        // Move to next segment (this will trigger completion logic above)
-        setCurrentSegmentIndex(currentSegmentIndex + 1);
+        // Move to completion
+        setCurrentSegmentIndex(prev => prev + 1);
         return;
       }
     }
@@ -102,7 +103,7 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({
         .join('');
       
       setDisplayedText(newDisplayedText);
-      setCurrentCharIndex(currentCharIndex + 1);
+      setCurrentCharIndex(prev => prev + 1);
     }, speed);
 
     return () => clearTimeout(timer);
@@ -111,7 +112,7 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({
   return (
     <span className={className}>
       {displayedText}
-      {showCursor && isTyping && (
+      {showCursor && (
         <span className="animate-pulse text-gray-400 ml-1">|</span>
       )}
     </span>
