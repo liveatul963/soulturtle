@@ -15,7 +15,7 @@ const SessionOptions: React.FC = () => {
         <div className="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
           {/* Quick Chat Card */}
           <TiltCard>
-            <div className="rounded-xl p-6 border bg-purple-50 hover:bg-purple-100 transition-all duration-300 shadow-lg hover:shadow-xl h-[280px] flex flex-col justify-between">
+            <div className="rounded-3xl p-6 border bg-purple-50 hover:bg-purple-100 transition-all duration-300 shadow-lg hover:shadow-xl h-[280px] flex flex-col justify-between">
               <h3 className="text-2xl font-semibold text-[#1B2531] mb-2">
                 Quick Chat
               </h3>
@@ -33,7 +33,7 @@ const SessionOptions: React.FC = () => {
 
           {/* Deep Dive Card */}
           <TiltCard>
-            <div className="rounded-xl p-6 border bg-teal-50 hover:bg-teal-100 transition-all duration-300 shadow-lg hover:shadow-xl h-[280px] flex flex-col justify-between">
+            <div className="rounded-3xl p-6 border bg-teal-50 hover:bg-teal-100 transition-all duration-300 shadow-lg hover:shadow-xl h-[280px] flex flex-col justify-between">
               <h3 className="text-2xl font-semibold text-[#1B2531] mb-2">
                 Deep Dive
               </h3>
