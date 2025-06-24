@@ -20,94 +20,126 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({
   onComplete
 }) => {
   const [displayedText, setDisplayedText] = useState('');
-  const [currentSegmentIndex, setCurrentSegmentIndex] = useState(0);
-  const [currentCharIndex, setCurrentCharIndex] = useState(0);
-  const [isTyping, setIsTyping] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isActive, setIsActive] = useState(false);
   const [showCursor, setShowCursor] = useState(true);
-  const [isPaused, setIsPaused] = useState(false);
 
   const PAUSE_MARKER = '@@PAUSE@@';
   const PAUSE_DURATION = 500;
 
-  // Split text into segments separated by pause markers
-  const textSegments = useMemo(() => text.split(PAUSE_MARKER), [text]);
-  const totalSegments = textSegments.length;
+  // Process text to handle pause markers
+  const processedText = useMemo(() => {
+    const parts = text.split(PAUSE_MARKER);
+    const result: Array<{ text: string; isPause: boolean }> = [];
+    
+    parts.forEach((part, index) => {
+      if (part) {
+        result.push({ text: part, isPause: false });
+      }
+      if (index < parts.length - 1) {
+        result.push({ text: '', isPause: true });
+      }
+    });
+    
+    return result;
+  }, [text]);
 
+  // Calculate total character count for completion check
+  const totalChars = useMemo(() => {
+    return processedText.reduce((acc, part) => acc + part.text.length, 0);
+  }, [processedText]);
+
+  // Start typing after initial delay
   useEffect(() => {
-    const startTimer = setTimeout(() => {
-      setIsTyping(true);
+    const timer = setTimeout(() => {
+      setIsActive(true);
     }, delay);
 
-    return () => clearTimeout(startTimer);
+    return () => clearTimeout(timer);
   }, [delay]);
 
+  // Main typing effect
   useEffect(() => {
-    if (!isTyping || isPaused) return;
+    if (!isActive) return;
 
-    // Check if we've finished all segments
-    if (currentSegmentIndex >= totalSegments) {
-      setIsTyping(false); // Stop typing
+    // Check if we've completed all text
+    if (currentIndex >= totalChars) {
       if (onComplete) onComplete();
       
       if (loop) {
         const loopTimer = setTimeout(() => {
           setDisplayedText('');
-          setCurrentSegmentIndex(0);
-          setCurrentCharIndex(0);
-          setIsTyping(true); // Restart typing
+          setCurrentIndex(0);
+          setShowCursor(true);
         }, loopDelay);
+        
         return () => clearTimeout(loopTimer);
       } else {
-        // Hide cursor after completion
         const cursorTimer = setTimeout(() => {
           setShowCursor(false);
         }, 1000);
+        
         return () => clearTimeout(cursorTimer);
       }
       return;
     }
 
-    const currentSegment = textSegments[currentSegmentIndex];
-    
-    // Check if we've finished the current segment
-    if (currentCharIndex >= currentSegment.length) {
-      // If this isn't the last segment, pause before moving to next
-      if (currentSegmentIndex < totalSegments - 1) {
-        setIsPaused(true);
-        
-        const pauseTimer = setTimeout(() => {
-          setIsPaused(false);
-          setCurrentSegmentIndex(prev => prev + 1);
-          setCurrentCharIndex(0);
-        }, PAUSE_DURATION);
-        
-        return () => clearTimeout(pauseTimer);
+    // Find current position in processed text
+    let charCount = 0;
+    let currentPartIndex = 0;
+    let charInPart = 0;
+
+    for (let i = 0; i < processedText.length; i++) {
+      const part = processedText[i];
+      if (part.isPause) {
+        if (charCount === currentIndex) {
+          // We're at a pause marker
+          const pauseTimer = setTimeout(() => {
+            setCurrentIndex(prev => prev + 1);
+          }, PAUSE_DURATION);
+          
+          return () => clearTimeout(pauseTimer);
+        }
+        charCount++;
       } else {
-        // Move to completion
-        setCurrentSegmentIndex(prev => prev + 1);
-        return;
+        if (currentIndex < charCount + part.text.length) {
+          currentPartIndex = i;
+          charInPart = currentIndex - charCount;
+          break;
+        }
+        charCount += part.text.length;
       }
     }
 
-    // Type the next character
+    // Build display text
+    let newDisplayText = '';
+    let processedChars = 0;
+
+    for (let i = 0; i < processedText.length; i++) {
+      const part = processedText[i];
+      if (part.isPause) {
+        processedChars++;
+        continue;
+      }
+
+      if (i < currentPartIndex) {
+        newDisplayText += part.text;
+        processedChars += part.text.length;
+      } else if (i === currentPartIndex) {
+        newDisplayText += part.text.slice(0, charInPart + 1);
+        break;
+      }
+    }
+
+    setDisplayedText(newDisplayText);
+
+    // Schedule next character
     const timer = setTimeout(() => {
-      const newDisplayedText = textSegments
-        .slice(0, currentSegmentIndex + 1)
-        .map((segment, index) => {
-          if (index < currentSegmentIndex) {
-            return segment; // Full segment
-          } else {
-            return segment.slice(0, currentCharIndex + 1); // Partial current segment
-          }
-        })
-        .join('');
-      
-      setDisplayedText(newDisplayedText);
-      setCurrentCharIndex(prev => prev + 1);
+      setCurrentIndex(prev => prev + 1);
     }, speed);
 
     return () => clearTimeout(timer);
-  }, [currentSegmentIndex, currentCharIndex, isTyping, isPaused, textSegments, totalSegments, speed, onComplete, loop, loopDelay]);
+  }, [currentIndex, isActive, processedText, totalChars, speed, onComplete, loop, loopDelay]);
 
   return (
     <span className={className}>
