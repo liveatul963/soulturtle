@@ -107,7 +107,7 @@ const Hero: React.FC = () => {
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 text-center">
         <div className="max-w-5xl mx-auto">
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif mb-12 leading-tight">
-            <span className="text-gray-800">Real Guides.</span>
+            <span className="text-gray-800">Soul Guides.</span>
             <br />
             <span className="text-gray-800">With a </span>
             <span className="animate-text-shimmer">Wink</span>
