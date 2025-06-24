@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 interface TypewriterTextProps {
   text: string;
@@ -20,21 +20,20 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({
   onComplete
 }) => {
   const [displayedText, setDisplayedText] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentSegmentIndex, setCurrentSegmentIndex] = useState(0);
+  const [currentCharIndex, setCurrentCharIndex] = useState(0);
   const [isTyping, setIsTyping] = useState(false);
   const [showCursor, setShowCursor] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
 
-  // Pause marker and duration
   const PAUSE_MARKER = '@@PAUSE@@';
-  const PAUSE_DURATION = 500; // 500ms pause
+  const PAUSE_DURATION = 500;
 
-  // Pre-process text to handle pause markers more efficiently
-  const textSegments = text.split(PAUSE_MARKER);
-  const cleanText = text.replace(new RegExp(PAUSE_MARKER, 'g'), '');
+  // Split text into segments separated by pause markers
+  const textSegments = useMemo(() => text.split(PAUSE_MARKER), [text]);
+  const totalSegments = textSegments.length;
 
   useEffect(() => {
-    // Start typing after delay
     const startTimer = setTimeout(() => {
       setIsTyping(true);
     }, delay);
@@ -45,55 +44,69 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({
   useEffect(() => {
     if (!isTyping || isPaused) return;
 
-    if (currentIndex >= text.length) {
-      // Typing is complete
-      if (onComplete) {
-        onComplete();
-      }
-
+    // Check if we've finished all segments
+    if (currentSegmentIndex >= totalSegments) {
+      if (onComplete) onComplete();
+      
       if (loop) {
-        // Hide cursor briefly, then restart after loopDelay
         setShowCursor(false);
         const loopTimer = setTimeout(() => {
           setDisplayedText('');
-          setCurrentIndex(0);
+          setCurrentSegmentIndex(0);
+          setCurrentCharIndex(0);
           setShowCursor(true);
         }, loopDelay);
         return () => clearTimeout(loopTimer);
       } else {
-        // Hide cursor after typing is complete
         const cursorTimer = setTimeout(() => {
           setShowCursor(false);
         }, 1000);
         return () => clearTimeout(cursorTimer);
       }
-    } else {
-      // Check if we've reached a pause marker
-      const remainingText = text.slice(currentIndex);
-      if (remainingText.startsWith(PAUSE_MARKER)) {
-        // We've hit a pause marker - pause without updating display
+      return;
+    }
+
+    const currentSegment = textSegments[currentSegmentIndex];
+    
+    // Check if we've finished the current segment
+    if (currentCharIndex >= currentSegment.length) {
+      // If this isn't the last segment, pause before moving to next
+      if (currentSegmentIndex < totalSegments - 1) {
         setIsPaused(true);
         
         const pauseTimer = setTimeout(() => {
           setIsPaused(false);
-          // Skip past the pause marker
-          setCurrentIndex(currentIndex + PAUSE_MARKER.length);
+          setCurrentSegmentIndex(currentSegmentIndex + 1);
+          setCurrentCharIndex(0);
         }, PAUSE_DURATION);
         
         return () => clearTimeout(pauseTimer);
       } else {
-        // Continue typing normally
-        const timer = setTimeout(() => {
-          // Update displayed text by showing clean text up to current position
-          const cleanIndex = text.slice(0, currentIndex + 1).replace(new RegExp(PAUSE_MARKER, 'g'), '').length;
-          setDisplayedText(cleanText.slice(0, cleanIndex));
-          setCurrentIndex(currentIndex + 1);
-        }, speed);
-        
-        return () => clearTimeout(timer);
+        // Move to next segment (this will trigger completion logic above)
+        setCurrentSegmentIndex(currentSegmentIndex + 1);
+        return;
       }
     }
-  }, [currentIndex, text, cleanText, speed, isTyping, onComplete, loop, loopDelay, isPaused]);
+
+    // Type the next character
+    const timer = setTimeout(() => {
+      const newDisplayedText = textSegments
+        .slice(0, currentSegmentIndex + 1)
+        .map((segment, index) => {
+          if (index < currentSegmentIndex) {
+            return segment; // Full segment
+          } else {
+            return segment.slice(0, currentCharIndex + 1); // Partial current segment
+          }
+        })
+        .join('');
+      
+      setDisplayedText(newDisplayedText);
+      setCurrentCharIndex(currentCharIndex + 1);
+    }, speed);
+
+    return () => clearTimeout(timer);
+  }, [currentSegmentIndex, currentCharIndex, isTyping, isPaused, textSegments, totalSegments, speed, onComplete, loop, loopDelay]);
 
   return (
     <span className={className}>
