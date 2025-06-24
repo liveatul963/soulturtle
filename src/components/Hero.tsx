@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronDown } from 'lucide-react';
+import TypewriterText from './TypewriterText';
 
 // Random interval constants (in milliseconds)
 const MIN_IDLE_WINK_INTERVAL = 5000; // 5 seconds
@@ -113,10 +114,6 @@ const Hero: React.FC = () => {
             <span className="animate-text-shimmer">Wink</span>
           </h1>
           
-          <p className="text-xl sm:text-2xl md:text-3xl text-gray-700 mb-16 max-w-2xl mx-auto leading-relaxed font-normal">
-            You already know... but ask anyway.
-          </p>
-          
           {/* Pure frame-swap mascot - single image element without hover enlargement */}
           <div className="mb-8">
             <div
@@ -137,10 +134,21 @@ const Hero: React.FC = () => {
               />
             </div>
           </div>
+
+          {/* Typing effect text below mascot */}
+          <div className="mb-12">
+            <p className="text-xl sm:text-2xl md:text-3xl text-gray-700 max-w-2xl mx-auto leading-relaxed font-normal min-h-[3rem] flex items-center justify-center">
+              <TypewriterText 
+                text="You already know... but ask anyway."
+                speed={80}
+                delay={1500}
+              />
+            </p>
+          </div>
           
           <button className="group px-12 py-6 bg-white/80 text-gray-800 font-semibold rounded-full text-xl shadow-md hover:shadow-lg transition-all duration-300 ease-in-out hover:scale-[1.02] relative overflow-hidden border border-white/70">
             <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[#EAE6FB] to-[#FAD6CF] opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md"></span>
-            <span className="relative z-10 font-semibold text-gray-800">Ask Your Turtle</span>
+            <span className="relative z-10 font-semibold text-gray-800">Reveal My Guide</span>
           </button>
         </div>
       </div>
