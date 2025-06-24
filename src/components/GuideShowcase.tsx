@@ -180,7 +180,7 @@ const GuideShowcase: React.FC = () => {
                 transitionDelay: `${index * 100}ms`
               }}
             >
-              <div className="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 min-h-[540px] flex flex-col justify-between">
+              <div className="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 h-[450px] flex flex-col justify-between">
                 {/* Available Indicator - Inside card at top-right */}
                 <div className={`absolute top-4 right-4 px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg border-2 ${
                   guide.is_available 
@@ -190,8 +190,8 @@ const GuideShowcase: React.FC = () => {
                   {guide.is_available ? 'Available' : 'Busy'}
                 </div>
 
-                {/* Profile Image Container - Larger size */}
-                <div className="relative w-36 h-36 mx-auto mb-6 flex-shrink-0">
+                {/* Profile Image Container - Optimized size for reduced height */}
+                <div className="relative w-28 h-28 mx-auto mb-4 flex-shrink-0">
                   {/* Main Profile Image */}
                   <div className="w-full h-full rounded-full border-4 border-white shadow-lg overflow-hidden">
                     <img
@@ -203,14 +203,14 @@ const GuideShowcase: React.FC = () => {
                   </div>
                   
                   {/* Emoji Badge - Outside circle at bottom-right */}
-                  <div className="absolute -bottom-2 -right-2 w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-lg border-4 border-white text-xl">
+                  <div className="absolute -bottom-1 -right-1 w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-lg border-3 border-white text-lg">
                     {getLevelBadge(guide)}
                   </div>
                 </div>
 
                 {/* Name and Specialty Section */}
-                <div className="text-center mb-6">
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                <div className="text-center mb-4">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-1">
                     {guide.name}
                   </h3>
                   <p className="text-[#4A5568] font-medium text-sm">
@@ -219,7 +219,7 @@ const GuideShowcase: React.FC = () => {
                 </div>
 
                 {/* Stats Section */}
-                <div className="flex items-center justify-center space-x-6 mb-6 text-sm text-gray-600">
+                <div className="flex items-center justify-center space-x-6 mb-4 text-sm text-gray-600">
                   <div className="flex items-center">
                     <Star className="w-4 h-4 mr-1 fill-yellow-400 text-yellow-400" />
                     <span className="font-medium">{guide.rating || 4.5}</span>
@@ -230,19 +230,19 @@ const GuideShowcase: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Bio Section */}
-                <div className="mb-6 flex-grow">
-                  <p className="text-gray-700 leading-relaxed text-sm font-normal text-center">
+                {/* Bio Section - Reduced for compact layout */}
+                <div className="mb-4 flex-grow">
+                  <p className="text-gray-700 leading-relaxed text-sm font-normal text-center line-clamp-3">
                     {guide.bio}
                   </p>
                 </div>
 
-                {/* Approach Section */}
-                <div className="mb-6 text-center">
-                  <span className="text-xs font-medium text-gray-600 uppercase tracking-wide block mb-2">
+                {/* Approach Section - Compact */}
+                <div className="mb-4 text-center">
+                  <span className="text-xs font-medium text-gray-600 uppercase tracking-wide block mb-1">
                     Approach
                   </span>
-                  <p className="text-gray-600 italic text-sm font-light">
+                  <p className="text-gray-600 italic text-xs font-light line-clamp-2">
                     {guide.approach}
                   </p>
                 </div>
