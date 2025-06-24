@@ -157,13 +157,13 @@ const GuideShowcase: React.FC = () => {
                     </div>
                   </div>
                   
-                  {/* Enhanced Availability Badge */}
-                  <div className={`px-3 py-1 rounded-full text-xs font-medium ${
+                  {/* Enhanced Availability Badge - More Prominent */}
+                  <div className={`px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg border-2 ${
                     guide.is_available 
-                      ? 'bg-green-100 text-green-700 shadow-md animate-pulse-slow' 
-                      : 'bg-yellow-100 text-yellow-700'
+                      ? 'bg-green-500 text-white border-green-400 shadow-green-200 animate-pulse-slow' 
+                      : 'bg-yellow-500 text-white border-yellow-400 shadow-yellow-200'
                   }`}>
-                    {guide.is_available ? 'Available' : 'Busy'}
+                    {guide.is_available ? '● Available' : '● Busy'}
                   </div>
                 </div>
 
