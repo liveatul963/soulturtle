@@ -62,10 +62,10 @@ const BecomeAGuideCTA: React.FC = () => {
           ))}
         </div>
 
-        {/* Enhanced Main CTA with subtle glow animation */}
+        {/* Enhanced Main CTA with improved contrast and subtle glow */}
         <div className="text-center">
           <TiltCard>
-            <div className="bg-gradient-to-br from-[#FAD6CF] to-[#EAE6FB] rounded-3xl p-8 shadow-2xl border-2 border-white/70 max-w-2xl mx-auto min-h-[280px] flex flex-col justify-between animate-subtle-glow">
+            <div className="bg-gradient-to-br from-white/90 via-[#FAFAF8]/80 to-white/70 rounded-3xl p-8 shadow-2xl border-2 border-white/80 max-w-2xl mx-auto min-h-[280px] flex flex-col justify-between animate-subtle-glow backdrop-blur-sm">
               <h3 className="text-2xl font-semibold text-gray-800 mb-4">
                 Ready to Guide Others? 🐢
               </h3>
@@ -73,7 +73,7 @@ const BecomeAGuideCTA: React.FC = () => {
                 We're looking for empathetic souls who can hold space for others' journeys. 
                 No formal credentials required - just genuine wisdom and a caring heart.
               </p>
-              <button className="group px-10 py-4 bg-gradient-to-r from-[#EAE6FB] to-[#FAD6CF] text-gray-800 font-semibold rounded-full hover:shadow-xl hover:scale-[1.02] transition-all duration-300 ease-in-out border border-white/70">
+              <button className="group px-10 py-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white font-semibold rounded-full hover:shadow-xl hover:scale-[1.02] transition-all duration-300 ease-in-out border-2 border-white/30 shadow-lg">
                 <span className="flex items-center justify-center">
                   Become a Guide
                   <ArrowRight className="ml-3 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
