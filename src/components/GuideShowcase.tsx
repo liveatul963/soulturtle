@@ -139,7 +139,7 @@ const GuideShowcase: React.FC = () => {
                 transitionDelay: `${index * 100}ms`
               }}
             >
-              <div className="group bg-white/80 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 min-h-[480px] flex flex-col justify-between">
+              <div className="group bg-white/80 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 h-[500px] flex flex-col justify-between">
                 {/* Header */}
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center">
